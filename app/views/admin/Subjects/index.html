@@ -1,0 +1,41 @@
+#{extends 'main.html' /}
+#{set title:'list exercise' /}
+<script type="text/javascript">
+
+$(document).ready(function(){  
+            loadGrid();  
+});  
+  
+//加载表格datagrid  
+function loadGrid()  
+{  
+    //加载数据  
+    $('#cxdm').datagrid({  
+                width: 'auto',  
+                height:300,               
+                striped: true,  
+                singleSelect : true,  
+                url:'/admin/subject/list',  
+                //queryParams:{},  
+                loadMsg:'数据加载中请稍后……',  
+                pagination: true,  
+                rownumbers: true,     
+                columns:[[  
+                    {field:'adviceid',title: '来文号',align: 'center',width: getWidth(0.2)},  
+                    {field:'consulter',title: '案由',align: 'center',width: getWidth(0.45),  
+                        //添加超级链，并将来文号作为参数传入  
+                        formatter:function(val,rec){  
+                            //alert(rec.adviceid);  
+                            return "<a href='jsp/proposal/psconsultview.jsp?id="+rec.adviceid+"'>"+val+"</a>";  
+                       }  
+                    },  
+                    {field:'content',title: '状态',align: 'center',width: getWidth(0.2)},  
+                    {field:'replynumber',title: '回复数',align: 'center',width: getWidth(0.05)}                                                          
+                ]]  
+            });  
+}  
+</script>
+
+<table id="cxdm"></table>
+
+
