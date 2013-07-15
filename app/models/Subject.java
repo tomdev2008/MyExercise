@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Id;
 import com.google.code.morphia.annotations.Reference;
 
 import play.modules.morphia.Model;
@@ -22,17 +23,17 @@ public class Subject extends Model{
 
     public SubjctStatus status;
 
-    public int type;
+    public int type =0;
 
     @Reference
     public Set<Tag> tags;
 
     public String title;
  
-    @Embedded
-    public List<Option> options;
+    @Reference
+    public List<Option> options = new ArrayList();
    
-    @Embedded
+    @Reference
     public Option answer;
 
     public String solution;
@@ -51,12 +52,7 @@ public class Subject extends Model{
     public Date createAt = new Date();
 
     public Date updateAt = new Date();
-    
-    @Embedded
-    public class Option{
-    	public String content;
-    	public Date createAt = new Date();
-        public Date updateAt = new Date();
-    }
+   
 }
+
 

@@ -8,19 +8,23 @@
 	<div style="margin:10px 0;"></div>
 	<div class="easyui-panel" title="New Topic" style="width:800px">
 		<div style="padding:10px 0 10px 60px">
-	    <form id="ff" method="post" action="/admin/subject/create">
+	    <form id="ff" method="post" action="/admin/subject/add">
 	    	<table>
 	    		<tr style="width:700px">
 	    			<td>题目:</td>
-	    			<td><textarea name="title" style="width:600px；height:60px;"></textarea></td>
+	    			<td><textarea name="title" style="height:60px;" cols=70></textarea></td>
 	    		</tr>
 	    		<tr>
 	    			<td>选项:</td>
 	    			<td><input class="easyui-validatebox" type="text" name="option" ></input></td>
 	    		</tr>
 	    		<tr>
+	    			<td>选项1:</td>
+	    			<td><input class="easyui-validatebox" type="text" name="option" ></input></td>
+	    		</tr>
+	    		<tr>
 	    			<td>解答:</td>
-	    			<td><textarea name="solution" style="width:600px；height:60px;"></textarea></td>
+	    			<td><textarea name="solution" style="height:60px;" cols=70></textarea></td>
 	    		</tr>
 	    	</table>
 	    </form>

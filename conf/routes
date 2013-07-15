@@ -16,7 +16,7 @@ GET     /public/                                staticDir:public
 
 GET    /admin/subject                          controllers.admin.Subjects.index
 GET    /admin/subject/add                      controllers.admin.Subjects.add
-POST   /admin/subject/add                      controllers.admin.Subjects.add
+POST   /admin/subject/add                      controllers.admin.Subjects.create
 
 
 *       /{controller}/{action}                  {controller}.{action}
