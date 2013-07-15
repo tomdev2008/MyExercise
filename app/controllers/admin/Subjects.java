@@ -1,10 +1,16 @@
 package controllers.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import models.Option;
 import models.Subject;
+import play.modules.morphia.Model.MorphiaQuery;
 import play.mvc.Controller;
+import service.EasyUIDataGridService;
+
 
 public class Subjects extends  Controller{
 
@@ -13,9 +19,13 @@ public class Subjects extends  Controller{
 		render();
     }
 	
-	public static void list() {
+	public static void list(final int page, final int rows, final String order,
+			final String sort, final String keyword) {
 		Subject.findAll();
-		render();
+		MorphiaQuery query = Subject.find();
+		
+		Map result = EasyUIDataGridService.getDataGridMap(page, rows, sort, order, query);
+		renderJSON(result, new play.modules.morphia.utils.ObjectIdGsonAdapter());
     }
 	
 	public static void add() {
@@ -44,4 +54,26 @@ public class Subjects extends  Controller{
 		sb.save();
         redirect("/admin/subject");
     }
+	
+	public static void update(){
+		render();
+	}
+	
+	
+	public static void delete(final String ids){
+		Map result = new HashMap();
+		if (StringUtils.isBlank(ids)) {
+			result.put("error", "请选择要删除的资源");
+			renderJSON(result);
+		}
+		String[] idArray = ids.split(",");
+		for (String id:idArray) {
+			Subject sl = Subject.findById(id);
+			if (sl == null) {
+				continue;
+			}
+		}
+		result.put("success", "删除成功");
+		render();
+	}
 }
