@@ -7,8 +7,8 @@
 <script>
 $(function() {
 	$("#SubjectList").datagrid(gridUtils.createGridOption({
-		title:"锁屏主题管理",
-		url : "@{Subjects.list}",
+		title:"题目管理",
+		url : "@{admin.Subjects.list}",
 		nowrap:false,
 		columns : [[
 				{field:'_id',hidden:true},
@@ -23,15 +23,6 @@ $(function() {
 				{field:'status',title:'状态',width:20,sortable:true,formatter:function(value){
 					var temp = "";
 					
-					if (value == "${utils.SubjctStatus.DRAFT") {
-						temp ="草稿";
-					}
-					if (value == "${utils.SubjctStatus.VALID") {
-						temp ="有效";
-					}
-					if (value == "${utils.SubjctStatus.INVALID") {
-						temp ="无效";
-					}
 					return temp;
 				}},
 				{field:'createAt',title:'上传时间',width:120,sortable:true,formatter:function(value){
@@ -53,10 +44,10 @@ $(function() {
 						if (!_id) {
 							return;
 						}
-						window.location.href = "@{admin.Subjects..update}?id=" + _id;
+						window.location.href = "@{admin.Subjects.update}?id=" + _id;
 					}
 				},{
-					text:'删除锁屏主题',
+					text:'删除题目',
 					iconCls:'icon-no',
 					handler:function(){
 						var ids = gridUtils.getIdsFromGrid("SubjectList");

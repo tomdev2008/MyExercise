@@ -55,7 +55,7 @@ public class Subjects extends  Controller{
         redirect("/admin/subject");
     }
 	
-	public static void update(){
+	public static void update(final String id){
 		render();
 	}
 	
