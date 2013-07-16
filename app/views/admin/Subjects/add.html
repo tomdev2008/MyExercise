@@ -9,10 +9,15 @@
 	<div class="easyui-panel" title="New Topic" style="width:800px">
 		<div style="padding:10px 0 10px 60px">
 	    <form id="ff" method="post" action="/admin/subject/add">
+	    <input type="hidden" name="subjectType" value="SINGLE">
 	    	<table>
 	    		<tr style="width:700px">
 	    			<td>题目:</td>
 	    			<td><textarea name="title" style="height:60px;" cols=70></textarea></td>
+	    		</tr>
+	    		<tr>
+	    			<td>Tag:</td>
+	    			<td><input class="easyui-validatebox" type="text" name="tags" ></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>选项:</td>

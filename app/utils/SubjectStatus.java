@@ -1,6 +1,6 @@
 package utils;
 
-public enum SubjctStatus {
+public enum SubjectStatus {
 
 	DRAFT,
 	VALID,

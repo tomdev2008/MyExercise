@@ -4,22 +4,22 @@
 #{include '/admin/common/search.html' /}
 	<table id="SubjectList"></table>
 </div>
-<script>
+<script type="text/javascript">
 $(function() {
 	$("#SubjectList").datagrid(gridUtils.createGridOption({
 		title:"题目管理",
-		url : "@{admin.Subjects.list}",
+		url : "/admin/subject/list",
 		nowrap:false,
 		columns : [[
 				{field:'_id',hidden:true},
 				{field:'checkbox',checkbox:true},
-				{field:'title',title:'题目名称',width:120,sortable:true},
+				{field:'title',title:'题目',width:120,sortable:true},
 				{field:'type',title:'类型',width:20,sortable:true},
-				{field:'tags',title:'类型',width:20,sortable:true,formatter:function(value){
+				{field:'tags',title:'tags',width:20,sortable:true,formatter:function(value){
 					var temp = "";
 					
 					return temp;
-			}},
+				}},
 				{field:'status',title:'状态',width:20,sortable:true,formatter:function(value){
 					var temp = "";
 					
@@ -34,7 +34,7 @@ $(function() {
 					text:'添加新题目',
 					iconCls:'icon-add',
 					handler:function(){
-						window.location.href = "@{admin.Subjects.add}";
+						window.location.href = "/admin/subject/add";
 					}
 				},{
 					text:'修改题目',

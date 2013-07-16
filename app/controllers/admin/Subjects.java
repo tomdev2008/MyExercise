@@ -5,25 +5,28 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+
 import models.Option;
 import models.Subject;
+import models.Tag;
 import play.modules.morphia.Model.MorphiaQuery;
 import play.mvc.Controller;
 import service.EasyUIDataGridService;
+import service.TagService;
+import service.UserService;
+import utils.SubjectStatus;
+import utils.SubjectType;
 
 
 public class Subjects extends  Controller{
 
 	public static void index() {
-		Subject.findAll();
 		render();
     }
 	
 	public static void list(final int page, final int rows, final String order,
 			final String sort, final String keyword) {
-		Subject.findAll();
 		MorphiaQuery query = Subject.find();
-		
 		Map result = EasyUIDataGridService.getDataGridMap(page, rows, sort, order, query);
 		renderJSON(result, new play.modules.morphia.utils.ObjectIdGsonAdapter());
     }
@@ -32,17 +35,14 @@ public class Subjects extends  Controller{
         render();
     }
 	
-	public static void create(String title,String solution) {
+	public static void create(String title,String subjectType,String tags,String solution) {
 		
 		String[] options = params.getAll("option");
-		System.out.println(options.toString());
 		Subject sb = new Subject();
 		sb.title =title;
 		int cnt =1;
 		for(String option : options){
-			System.out.println(option);
 			Option o = new Option();
-			
 			o.content=option;
 			o.save();
 			sb.options.add(o);
@@ -51,6 +51,16 @@ public class Subjects extends  Controller{
 			}
 			cnt++;
 		}
+//		String[] tagArr = tags.split(",");
+//		for(String tag:tagArr){
+//			Tag t = TagService.getTag(tag);
+//			sb.tags.add(t);
+//		}
+		
+		sb.owner = UserService.getUser("admin");
+		sb.status = SubjectStatus.VALID;
+		sb.type = SubjectType.valueOf(subjectType);
+		sb.solution = solution;
 		sb.save();
         redirect("/admin/subject");
     }
