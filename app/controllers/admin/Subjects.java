@@ -51,11 +51,11 @@ public class Subjects extends  Controller{
 			}
 			cnt++;
 		}
-//		String[] tagArr = tags.split(",");
-//		for(String tag:tagArr){
-//			Tag t = TagService.getTag(tag);
-//			sb.tags.add(t);
-//		}
+		String[] tagArr = tags.split(",");
+		for(String tag:tagArr){
+			Tag t = TagService.getTag(tag);
+			sb.tags.add(t);
+		}
 		
 		sb.owner = UserService.getUser("admin");
 		sb.status = SubjectStatus.VALID;
