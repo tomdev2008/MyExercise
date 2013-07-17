@@ -1,4 +1,4 @@
-#{extends 'main.html' /}
+#{extends 'admin/main.html' /}
 #{set title:'list exercise' /}
 <div class="mid">
 #{include '/admin/common/search.html' /}
@@ -8,7 +8,7 @@
 $(function() {
 	$("#SubjectList").datagrid(gridUtils.createGridOption({
 		title:"题目管理",
-		url : "/admin/subject/list",
+		url : "@{admin.Subjects.list}",
 		nowrap:false,
 		columns : [[
 				{field:'_id',hidden:true},
@@ -34,7 +34,7 @@ $(function() {
 					text:'添加新题目',
 					iconCls:'icon-add',
 					handler:function(){
-						window.location.href = "/admin/subject/add";
+						window.location.href = "@{admin.Subjects.add}";
 					}
 				},{
 					text:'修改题目',

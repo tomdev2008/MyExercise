@@ -9,13 +9,13 @@ import org.apache.commons.lang.StringUtils;
 import models.Option;
 import models.Subject;
 import models.Tag;
+import models.enums.SubjectStatus;
+import models.enums.SubjectType;
 import play.modules.morphia.Model.MorphiaQuery;
 import play.mvc.Controller;
 import service.EasyUIDataGridService;
 import service.TagService;
 import service.UserService;
-import utils.SubjectStatus;
-import utils.SubjectType;
 
 
 public class Subjects extends  Controller{
@@ -62,7 +62,7 @@ public class Subjects extends  Controller{
 		sb.type = SubjectType.valueOf(subjectType);
 		sb.solution = solution;
 		sb.save();
-        redirect("/admin/subject");
+		index();
     }
 	
 	public static void update(final String id){

@@ -2,12 +2,13 @@ package models;
 
 import java.util.*;
 
+import models.enums.SubjectStatus;
+import models.enums.SubjectType;
+
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Reference;
 
 import play.modules.morphia.Model;
-import utils.SubjectStatus;
-import utils.SubjectType;
 
 /**
  * Created with IntelliJ IDEA.

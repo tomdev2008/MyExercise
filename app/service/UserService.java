@@ -1,8 +1,9 @@
 package service;
 
+import play.libs.Codec;
 import models.User;
-import utils.UserRoleType;
-import utils.UserStatus;
+import models.enums.RoleType;
+import models.enums.UserStatus;
 
 public class UserService {
 
@@ -14,9 +15,9 @@ public class UserService {
 		}
 		User user = new User();
 		user.userName = userName;
-		user.password = "12345";
+		user.password = Codec.hexMD5("12345");
 		user.status = UserStatus.NEWBIE;
-		user.roleType = UserRoleType.ADMIN;
+		user.roleType = RoleType.ADMIN;
 		user.save();
 		return user;
 		
