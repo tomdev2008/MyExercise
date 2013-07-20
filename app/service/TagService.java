@@ -21,23 +21,43 @@ public class TagService {
 		MorphiaQuery query = Tag.filter("name", tag[tag.length-1]);
 		
 		Tag t = null;
-		
 		if(query.count()==0){
-			for(int i=0;i<tag.length ;i++){
-				if(Tag.filter("name", tag[i]).first()== null){
-					if(i==0){
-						 t  = new Tag(tag[i],null);
-						 t.save();
-					}else{
-						Tag context = Tag.filter("name", tag[i-1]).first();
-						t = new Tag(tag[i],context);
-						t.save();
-					}
-					
+			t = addTag(name);
+		}else{
+			t = query.first();
+		}
+		return t;
+	}
+	
+	public static Tag addTag(String tagName){
+		String[] tag = tagName.split(":");
+		Tag t = null;
+		for(int i=0;i<tag.length ;i++){
+			if(Tag.filter("name", tag[i]).first()== null){
+				if(i==0){
+					 t  = new Tag(tag[i],null);
+					 t.save();
+				}else{
+					Tag context = Tag.filter("name", tag[i-1]).first();
+					t = new Tag(tag[i],context);
+					t.save();
 				}
+				
 			}
 		}
 		return t;
+	}
+	
+	public static boolean isExist(String tag){
+		if(StringUtils.isBlank(tag)){
+			return false;
+		}
+		String[] tags = tag.split(":");
+		MorphiaQuery query = Tag.filter("name", tags[tags.length-1]);
+		if(query.count() >0){
+			return true;
+		}
+		return false;
 	}
 	
 	
