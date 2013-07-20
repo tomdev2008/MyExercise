@@ -2,13 +2,13 @@ package models;
 
 import java.util.*;
 
-import com.google.code.morphia.annotations.Embedded;
+import models.enums.SubjectStatus;
+import models.enums.SubjectType;
+
 import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.annotations.Id;
 import com.google.code.morphia.annotations.Reference;
 
 import play.modules.morphia.Model;
-import utils.SubjctStatus;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,12 +21,13 @@ import utils.SubjctStatus;
 @Entity
 public class Subject extends Model{
 
-    public SubjctStatus status;
+    public SubjectStatus status;
 
-    public int type =0;
+    public SubjectType type;
 
+  
     @Reference
-    public Set<Tag> tags;
+    public Set<Tag> tags = new HashSet();
 
     public String title;
  

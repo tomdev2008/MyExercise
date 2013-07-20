@@ -2,10 +2,11 @@ package models;
 
 import java.util.Date;
 
+import models.enums.UserExerciseStatus;
+
 import com.google.code.morphia.annotations.Reference;
 
 import play.modules.morphia.Model;
-import utils.UserExerciseStatus;
 
 public class UserExercise extends Model {
 
