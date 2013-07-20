@@ -1,6 +1,6 @@
 #{extends 'admin/main.html' /}
 #{set title:"管理主页" /}
-<div id="hd"><div id="user"><a class="updatePass" href="javascript:void(0)">${controllers.admin.Secure.getLoginUser().userName}</a><a class="logout" href="@{admin.Secure.logout}">退出</a></div>欢迎使用手机桌面服务端管理平台 </div>
+<div id="hd"><div id="user"><a class="updatePass" href="javascript:void(0)">${controllers.admin.Secure.getLoginUser().userName}</a><a class="logout" href="@{admin.Secure.logout}">退出</a></div>欢迎使用在线试题后台管理平台 </div>
 <div id="mainList">
     <ul id="mainTree" class="easyui-tree"></ul>
 </div>
