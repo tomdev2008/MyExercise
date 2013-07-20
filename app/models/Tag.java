@@ -12,4 +12,13 @@ public class Tag extends Model{
 	public Tag context;
 	
 	public String name;
+	
+	
+	
+	
+	public Tag(String name,Tag tagContext){
+		this.name=name;
+		this.context=tagContext;
+	}
+	
 }
