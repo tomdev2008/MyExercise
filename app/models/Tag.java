@@ -21,4 +21,14 @@ public class Tag extends Model{
 		this.context=tagContext;
 	}
 	
+	
+	public String getFullTagName(){
+		String tName = this.name;
+		Tag tag = this.context;
+		while(tag !=null){
+			tName = tag.name+":"+tName;
+			tag = tag.context;
+		}
+		return tName;
+	}
 }

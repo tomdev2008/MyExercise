@@ -60,5 +60,14 @@ public class TagService {
 		return false;
 	}
 	
+	public static String getFullTagName(Tag tag){
+		String name=tag.name;
+		while(tag.context!=null){
+			tag = tag.context;
+			name = tag.name+":"+name;
+		}
+		return name;
+	}
+	
 	
 }

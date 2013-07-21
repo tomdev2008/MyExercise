@@ -31,6 +31,11 @@ public class Subjects extends  Controller{
 		renderJSON(result, new play.modules.morphia.utils.ObjectIdGsonAdapter());
     }
 	
+	public static void detail(String id){
+		Subject item = Subject.findById(id);
+		render(item);
+	}
+	
 	public static void add() {
         render();
     }
