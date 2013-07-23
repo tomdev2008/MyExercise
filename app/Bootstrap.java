@@ -15,8 +15,8 @@ import play.jobs.OnApplicationStart;
 
 /**
  * Application Startup
- * @author wujinliang
- * @since 2012/09/24
+ * @author jiwei
+ * @since 2013-7-14
  */
 @OnApplicationStart
 public class Bootstrap extends Job {

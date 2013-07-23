@@ -17,8 +17,8 @@ import controllers.admin.Secure;
 import play.mvc.Util;
 /**
  * 生成EasyUI的tree的共用工具类.
- * @author zhaojingyu
- * @since 2012-11-10
+ * @author jiwei
+ * @since 2013-7-14
  */
 public class TreeService {
 	/**

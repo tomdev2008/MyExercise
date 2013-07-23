@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author wujinliang
- * @since 4/15/13
+ * @author jiwei
+ * @since 2013-7-14
  */
 public class EasyList<E> extends ArrayList<E> {
     private static final long serialVersionUID = 3623753774034207089L;

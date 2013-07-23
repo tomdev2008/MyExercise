@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Map;
+
 import play.modules.morphia.Model;
 
 import com.google.code.morphia.annotations.Entity;
@@ -13,7 +15,9 @@ public class Tag extends Model{
 	
 	public String name;
 	
+	public int index;
 	
+	public Map info;
 	
 	
 	public Tag(String name,Tag tagContext){
@@ -31,4 +35,5 @@ public class Tag extends Model{
 		}
 		return tName;
 	}
+
 }

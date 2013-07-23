@@ -8,8 +8,8 @@ import java.util.Set;
 
 /**
  * 统一后台管理角色模型类.
- * @author zhaojingyu
- * @since 2012-11-10
+ * @author jiwei
+ * @since 2013-7-14
  */
 @Entity
 public class AdminRole extends Model {

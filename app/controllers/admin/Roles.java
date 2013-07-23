@@ -18,8 +18,8 @@ import play.mvc.With;
 import utils.EasyMap;
 /**
  * 角色管理.
- * @author zhaojingyu
- * @since 2012-11-10
+ * @author jiwei
+ * @since 2013-7-14
  */
 @With({Secure.class, LogPrinter.class })
 public class Roles extends Controller {
@@ -49,6 +49,7 @@ public class Roles extends Controller {
 		long total = AdminRole.count();
 		result.put("rows", roles);
 		result.put("total", total);
+		System.out.println("=============total="+total);
 		renderJSON(result, new play.modules.morphia.utils.ObjectIdGsonAdapter());
 	}
 	/**

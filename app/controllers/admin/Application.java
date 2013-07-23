@@ -13,8 +13,8 @@ import service.TreeService;
 
 /**
  * 后台运营管理系统页面控制器.
- * @author zhaojingyu
- * @since 2012-11-08
+ * @author jiwei
+ * @since 2013-7-14
  */
 @With({Secure.class, LogPrinter.class })
 public class Application extends Controller {

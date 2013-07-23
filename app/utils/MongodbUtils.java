@@ -1,8 +1,8 @@
 package utils;
 
 /**
- * @author wujinliang
- * @since 12/24/12
+ * @author jiwei
+ * @since 2013-7-14
  */
 public class MongodbUtils {
     private static String DOT_FLAG = "$DOT$";

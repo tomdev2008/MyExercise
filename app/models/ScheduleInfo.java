@@ -1,24 +1,21 @@
 package models;
 
 import java.util.Date;
-import java.util.List;
-
-import play.modules.morphia.Model;
 
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Reference;
 
+import play.modules.morphia.Model;
+
 @Entity
-public class StudentPofile extends Model{
-	
+public class ScheduleInfo extends Model {
+
 	@Reference
-	public User user;
+	public Tag tag;
 	
-	@Reference
-	public List<ScheduleInfo> schedule;
+	public int score;
 	
 	public Date createAt;
 	
 	public Date UpdateAt;
-	
 }

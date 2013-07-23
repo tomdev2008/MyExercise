@@ -25,8 +25,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import controllers.Public;
 
 /**
- * @since 2012-11-12
- * @author zhaojingyu
+ * @author jiwei
+ * @since 2013-7-14
  */
 public class Secure extends Controller {
     // TODO:暂时使用ehcache来缓存Model类对象，但是没法在分布式环境使用，若是使用memcached的话，需要model类有serialVersionUID字段，且classLoader要一致，现在出现了从memcached反序列化的Model类classloader不是PlayClassLoader,会报ClassCast错误

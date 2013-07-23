@@ -7,8 +7,8 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 
 /**
- * @author wujinliang
- * @since 5/17/13
+ * @author jiwei
+ * @since 2013-7-14
  */
 public class NetUtils {
     public static String getIp(Http.Request request) {

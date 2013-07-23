@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @date: 11-1-13
- * @author: wujinliang
+ * @author jiwei
+ * @since 2013-7-14
  */
 public class EasyMap<K, V> extends HashMap<K, V> {
     public EasyMap() {

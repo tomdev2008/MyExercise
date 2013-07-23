@@ -9,8 +9,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
- * @author wujinliang
- * @since 5/8/13
+ * @author jiwei
+ * @since 2013-7-14
  */
 public class JsonHelper {
     private static ObjectMapper mapper = new ObjectMapper();

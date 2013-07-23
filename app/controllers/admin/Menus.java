@@ -15,8 +15,8 @@ import service.TreeService;
 import utils.EasyMap;
 /**
  * 菜单管理.
- * @author zhaojingyu
- * @since 2012-11-10
+ * @author jiwei
+ * @since 2013-7-14
  */
 @With({Secure.class, LogPrinter.class })
 public class Menus extends Controller {

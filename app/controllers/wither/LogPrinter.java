@@ -11,8 +11,8 @@ import controllers.admin.Secure;
 
 /**
  * 后台日志记录.
- * @author zhaojingyu
- * @since 2012-12-14
+ * @author jiwei
+ * @since 2013-7-14
  */
 public class LogPrinter extends Controller {
 	/**
