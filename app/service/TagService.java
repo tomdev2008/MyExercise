@@ -36,10 +36,34 @@ public class TagService {
 			if(Tag.filter("name", tag[i]).first()== null){
 				if(i==0){
 					 t  = new Tag(tag[i],null);
+					 t.index=0;
+					 t.save();
+				}else{
+					Tag context = Tag.filter("name", tag[i-1]).first();
+					Long index = Tag.filter("context", context).countAll();
+					t = new Tag(tag[i],context);
+					t.index = Integer.parseInt(index.toString())+1;
+					t.save();
+				}
+				
+			}
+		}
+		return t;
+	}
+	
+	public static Tag addTag(String tagName,int index){
+		String[] tag = tagName.split(":");
+		Tag t = null;
+		for(int i=0;i<tag.length ;i++){
+			if(Tag.filter("name", tag[i]).first()== null){
+				if(i==0){
+					 t  = new Tag(tag[i],null);
+					 t.index=index;
 					 t.save();
 				}else{
 					Tag context = Tag.filter("name", tag[i-1]).first();
 					t = new Tag(tag[i],context);
+					t.index = index;
 					t.save();
 				}
 				

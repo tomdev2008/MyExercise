@@ -1,14 +1,29 @@
 package controllers.admin;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.map.util.JSONPObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import models.Menu;
+import models.Tag;
 import controllers.Public;
 import controllers.wither.LogPrinter;
+import play.Play;
 import play.libs.Codec;
 import play.mvc.Controller;
 import play.mvc.With;
+import service.TagService;
 import service.TreeService;
 
 /**
@@ -46,5 +61,68 @@ public class Application extends Controller {
 		List<Map> result = new ArrayList();
 		TreeService.createTree(roots, result, true);
 		renderJSON(result);
+	}
+	
+	
+	public static void initTag() throws IOException{
+		
+		
+		File file = Play.getFile("/tags/english-1.txt");
+		FileReader reader = new FileReader(file);
+		BufferedReader br = new BufferedReader(reader);
+		String tag = null;
+		while((tag =br.readLine()) != null) {
+			TagService.addTag(tag);
+		}
+		br.close();
+		reader.close();
+		
+		file = Play.getFile("/tags/grade-1.txt");
+		reader = new FileReader(file);
+		br = new BufferedReader(reader);
+		
+		while((tag =br.readLine()) != null) {
+			TagService.addTag(tag);
+		}
+		br.close();
+		reader.close();
+		
+		file = Play.getFile("/tags/math-1.txt");
+		reader = new FileReader(file);
+		br = new BufferedReader(reader);
+		
+		while((tag =br.readLine()) != null) {
+			TagService.addTag(tag);
+		}
+		br.close();
+		reader.close();
+		
+		file = Play.getFile("/tags/origin-1.txt");
+		reader = new FileReader(file);
+		br = new BufferedReader(reader);
+		
+		while((tag =br.readLine()) != null) {
+			TagService.addTag(tag);
+		}
+		br.close();
+		reader.close();
+		
+		
+		file = Play.getFile("/tags/subject-1.txt");
+		reader = new FileReader(file);
+		br = new BufferedReader(reader);
+		
+		while((tag =br.readLine()) != null) {
+			TagService.addTag(tag);
+		}
+		br.close();
+		reader.close();
+		
+	}
+	
+	public static void get(){
+		
+		
+		
 	}
 }
