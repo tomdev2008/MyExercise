@@ -15,6 +15,12 @@ public class StudentPofile extends Model{
 	public User user;
 	
 	@Reference
+	public List<Tag> grades;
+	
+	@Reference
+	public List<Tag> courses;
+	
+	@Reference
 	public List<ScheduleInfo> schedule;
 	
 	public Date createAt;

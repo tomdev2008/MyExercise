@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
 
 import models.enums.UserExerciseStatus;
 
@@ -14,7 +15,8 @@ public class UserExercise extends Model {
 	public User user;
 	@Reference
 	public Subject subject;
-    
+	@Reference
+	public List<Option>  userAnswer;
 	public UserExerciseStatus status;
 	public int completeCount;
 	public int correctCount;

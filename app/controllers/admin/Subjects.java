@@ -52,7 +52,7 @@ public class Subjects extends  Controller{
 			o.save();
 			sb.options.add(o);
 			if(cnt ==1){
-				sb.answer = o;
+				sb.answer.add(o);
 			}
 			cnt++;
 		}
