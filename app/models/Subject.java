@@ -35,7 +35,7 @@ public class Subject extends Model{
     public List<Option> options = new ArrayList();
    
     @Reference
-    public Option answer;
+    public List<Option> answer= new ArrayList();
 
     public String solution;
 
