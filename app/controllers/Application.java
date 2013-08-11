@@ -16,4 +16,8 @@ public class Application extends Controller {
     public static void doExercise() {
     	render();
     }
+    
+    public static void result() {
+    	render();
+    }
 }
