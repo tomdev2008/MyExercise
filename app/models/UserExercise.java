@@ -1,7 +1,9 @@
 package models;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import models.enums.UserExerciseStatus;
 
@@ -17,6 +19,9 @@ public class UserExercise extends Model {
 	@Reference
 	public User user;
 	
+	@Reference
+	public Set<Tag> tags = new HashSet();
+	   
 	@Reference
 	@Unique
 	public Subject subject;
