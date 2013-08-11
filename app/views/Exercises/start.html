@@ -218,6 +218,10 @@
 	var countId;
 	var result = {};
 	$(function() {
+		$(".question-wrap").each(function() {
+			var id = $(this).data("id");
+			result[id] = ""; 
+		})
 		var start = new Date(2013,01,01);
 		startCount(start);
 		$(".pause").click(function() {
