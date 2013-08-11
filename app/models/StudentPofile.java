@@ -22,7 +22,7 @@ public class StudentPofile extends Model{
 	public List<Tag> courses = new ArrayList<Tag>();
 	
 	@Reference
-	public List<ScheduleInfo> schedule;
+	public List<ScheduleInfo> schedule = new ArrayList<ScheduleInfo>();
 	
 	public Date createAt;
 	

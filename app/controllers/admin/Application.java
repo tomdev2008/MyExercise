@@ -5,15 +5,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import models.Menu;
 import models.ScheduleInfo;
 import models.StudentPofile;
+import models.Subject;
 import models.Tag;
 import models.User;
+import models.UserExercise;
 import models.enums.RoleType;
+import models.enums.UserExerciseStatus;
 import controllers.Public;
 import controllers.wither.LogPrinter;
 import play.Play;
@@ -130,6 +136,7 @@ public class Application extends Controller {
 		if(st == null){
 			st = new StudentPofile();
 			st.user = user;
+			
 			Tag tag1 = Tag.filter("name", "英语").first();
 			Tag tag2 = Tag.filter("name", "数学").first();
 			st.courses.add(tag1);
@@ -140,6 +147,21 @@ public class Application extends Controller {
 			sif.tag  = Tag.filter("name", "元素与集合的概念").first();
 			sif.save();
 			st.schedule.add(sif);
+			st.save();
+		}
+		
+		//Set<Tag> tags = new HashSet();
+		//tags.add((Tag)Tag.filter("name", "数学").first());
+		//tags.add((Tag)Tag.filter("name", "高一").first());
+		//tags.add((Tag)Tag.filter("name", "元素与集合的概念").first());
+		//List<Subject> sbs = Subject.filter("tags", tags).asList();
+		List<Subject> sbs = Subject.findAll();
+		for(Subject sb:sbs){
+			UserExercise ue = new UserExercise();
+			ue.status =UserExerciseStatus.START;
+			ue.user = user;
+			ue.subject = sb;
+			ue.save();
 		}
 		
 	}

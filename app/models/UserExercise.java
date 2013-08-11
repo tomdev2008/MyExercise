@@ -5,15 +5,20 @@ import java.util.List;
 
 import models.enums.UserExerciseStatus;
 
+import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Reference;
 
 import play.modules.morphia.Model;
+import play.modules.morphia.validation.Unique;
 
+@Entity
 public class UserExercise extends Model {
 
 	@Reference
 	public User user;
+	
 	@Reference
+	@Unique
 	public Subject subject;
 	@Reference
 	public List<Option>  userAnswer;
