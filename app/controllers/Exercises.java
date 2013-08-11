@@ -57,12 +57,19 @@ public class Exercises extends Controller {
 					}
 				}
 			}
+			
 			if(userExercise.subject.answer.size() == cnt){
 				userExercise.correctCount = userExercise.correctCount+1;
 				correctCnt++;
+				userExercise.currentScore = 1;
 			}else{
-				userExercise.mistakeCount = userExercise.mistakeCount+1;
-				mistakeCnt++;
+				if(userExercise.userAnswer.size() ==0){
+					userExercise.currentScore = -1;
+				}else{
+					userExercise.mistakeCount = userExercise.mistakeCount+1;
+					mistakeCnt++;
+					userExercise.currentScore = 0;
+				}
 			}
 			userExercise.completeCount= userExercise.completeCount+1;
 			userExercise.updateAt = new Date();

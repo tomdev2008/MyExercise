@@ -28,6 +28,9 @@ public class UserExercise extends Model {
 	@Reference
 	public List<Option>  userAnswer;
 	public UserExerciseStatus status;
+	
+	public int currentScore;
+	
 	public int completeCount;
 	public int correctCount;
 	public int mistakeCount;
