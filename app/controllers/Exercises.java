@@ -40,6 +40,8 @@ public class Exercises extends Controller {
 	public static void end(String answer){
 		String[] an = answer.split(",");
 		List<UserExercise> exercises = new ArrayList();
+		int correctCnt=0;
+		int mistakeCnt=0;
 		for(String a :an){
 			String[] item = a.split("_");
 			UserExercise  userExercise = UserExercise.findById(item[0]);
@@ -56,9 +58,10 @@ public class Exercises extends Controller {
 			}
 			if(userExercise.subject.answer.size() == cnt){
 				userExercise.correctCount = userExercise.correctCount+1;
+				correctCnt++;
 			}else{
-				
 				userExercise.mistakeCount = userExercise.mistakeCount+1;
+				mistakeCnt++;
 			}
 			userExercise.completeCount= userExercise.completeCount+1;
 			userExercise.updateAt = new Date();
@@ -66,6 +69,6 @@ public class Exercises extends Controller {
 			exercises.add(userExercise);
 		}	
 		
-		render(exercises);
+		render(exercises,correctCnt,mistakeCnt);
 	}
 }
