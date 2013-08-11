@@ -25,6 +25,18 @@
 }
 </style>
 </head>
+%{
+	List<String> ans = new ArrayList<String>();
+	ans.add("A");
+	ans.add("B");
+	ans.add("C");
+	ans.add("D");
+	ans.add("E");
+	ans.add("F");
+	ans.add("G");
+	ans.add("H");
+	ans.add("I");
+}%
 <body data-environment="production" data-page-name="Exercise">
 	<div class="wrap">
 		<div class="repeat-x default-t">
@@ -97,196 +109,34 @@
 							</div>
 							<div class="chapter-desc-list"></div>
 							<div class="chapter-wrap">
-								<div class="question-wrap" data-id="37131"
+							
+							#{list items:exercise,as:'e'}
+								<div class="question-wrap" data-id="${e._id}"
 									data-question-index="0" data-is-multiple="false"
-									data-collected="false" id="question0">
+									data-collected="false" id="question${e_index}">
 									<div class="question">
 										<div class="content clearfix">
-											<div class="index pull-left">1</div>
+											<div class="index pull-left">${e_index}</div>
 											<div class="overflow">
-												<p>股份有限公司是指由一定人数以上的股东组成，其全部资本分为等额股份，股东只就其所认股份即出资额对公司承担有限责任，公司只以其全部资产对公司债务承担责任的公司。</p>
-												<p>下列情况属于股份有限公司的是（ &nbsp;）</p>
+												<p>${e.subject.title}</p>
 											</div>
 										</div>
 										<div class="options">
+											#{list items:e.subject.options,as:'o'}
 											<div class="option">
-												<span class="lbl">A.</span> 甲公司和乙公司门前一片草地无人看管护理，便协商由两公司各负责一年
+												<span class="lbl">${ans.get(o_index - 1)}</span> ${o.content}
 											</div>
-											<div class="option">
-												<span class="lbl">B.</span>
-												甲公司进行改组，将全部资本分为五万股，由职工认购，并改名为“××有限责任公司”
-											</div>
-											<div class="option">
-												<span class="lbl">C.</span> 由原电子部下属的科研所改制成立国家控股的科研开发中心
-											</div>
-											<div class="option">
-												<span class="lbl">D.</span> 小张、小王和村里的其他人一起建起了一所村小学
-											</div>
+											#{/list}
 										</div>
 										<ul class="answers">
-											<li class="answer" data-answer-index="0"><span
-												class="answer-radio i-20"></span> A</li>
-											<li class="answer" data-answer-index="1"><span
-												class="answer-radio i-20"></span> B</li>
-											<li class="answer" data-answer-index="2"><span
-												class="answer-radio i-20"></span> C</li>
-											<li class="answer" data-answer-index="3"><span
-												class="answer-radio i-20"></span> D</li>
+											#{list items:e.subject.options,as:'o'}
+											<li class="answer" data-answer-id="${o._id}"><span
+												class="answer-radio i-20"></span> ${ans.get(o_index - 1)}</li>
+											#{/list}
 										</ul>
 									</div>
 								</div>
-								<div class="question-wrap" data-id="37131"
-									data-question-index="0" data-is-multiple="false"
-									data-collected="false" id="question0">
-									<div class="question">
-										<div class="content clearfix">
-											<div class="index pull-left">1</div>
-											<div class="overflow">
-												<p>股份有限公司是指由一定人数以上的股东组成，其全部资本分为等额股份，股东只就其所认股份即出资额对公司承担有限责任，公司只以其全部资产对公司债务承担责任的公司。</p>
-												<p>下列情况属于股份有限公司的是（ &nbsp;）</p>
-											</div>
-										</div>
-										<div class="options">
-											<div class="option">
-												<span class="lbl">A.</span> 甲公司和乙公司门前一片草地无人看管护理，便协商由两公司各负责一年
-											</div>
-											<div class="option">
-												<span class="lbl">B.</span>
-												甲公司进行改组，将全部资本分为五万股，由职工认购，并改名为“××有限责任公司”
-											</div>
-											<div class="option">
-												<span class="lbl">C.</span> 由原电子部下属的科研所改制成立国家控股的科研开发中心
-											</div>
-											<div class="option">
-												<span class="lbl">D.</span> 小张、小王和村里的其他人一起建起了一所村小学
-											</div>
-										</div>
-										<ul class="answers">
-											<li class="answer" data-answer-index="0"><span
-												class="answer-radio i-20"></span> A</li>
-											<li class="answer" data-answer-index="1"><span
-												class="answer-radio i-20"></span> B</li>
-											<li class="answer" data-answer-index="2"><span
-												class="answer-radio i-20"></span> C</li>
-											<li class="answer" data-answer-index="3"><span
-												class="answer-radio i-20"></span> D</li>
-										</ul>
-									</div>
-								</div>
-								<div class="question-wrap" data-id="37131"
-									data-question-index="0" data-is-multiple="false"
-									data-collected="false" id="question0">
-									<div class="question">
-										<div class="content clearfix">
-											<div class="index pull-left">1</div>
-											<div class="overflow">
-												<p>股份有限公司是指由一定人数以上的股东组成，其全部资本分为等额股份，股东只就其所认股份即出资额对公司承担有限责任，公司只以其全部资产对公司债务承担责任的公司。</p>
-												<p>下列情况属于股份有限公司的是（ &nbsp;）</p>
-											</div>
-										</div>
-										<div class="options">
-											<div class="option">
-												<span class="lbl">A.</span> 甲公司和乙公司门前一片草地无人看管护理，便协商由两公司各负责一年
-											</div>
-											<div class="option">
-												<span class="lbl">B.</span>
-												甲公司进行改组，将全部资本分为五万股，由职工认购，并改名为“××有限责任公司”
-											</div>
-											<div class="option">
-												<span class="lbl">C.</span> 由原电子部下属的科研所改制成立国家控股的科研开发中心
-											</div>
-											<div class="option">
-												<span class="lbl">D.</span> 小张、小王和村里的其他人一起建起了一所村小学
-											</div>
-										</div>
-										<ul class="answers">
-											<li class="answer" data-answer-index="0"><span
-												class="answer-radio i-20"></span> A</li>
-											<li class="answer" data-answer-index="1"><span
-												class="answer-radio i-20"></span> B</li>
-											<li class="answer" data-answer-index="2"><span
-												class="answer-radio i-20"></span> C</li>
-											<li class="answer" data-answer-index="3"><span
-												class="answer-radio i-20"></span> D</li>
-										</ul>
-									</div>
-								</div>
-								<div class="question-wrap" data-id="37131"
-									data-question-index="0" data-is-multiple="false"
-									data-collected="false" id="question0">
-									<div class="question">
-										<div class="content clearfix">
-											<div class="index pull-left">1</div>
-											<div class="overflow">
-												<p>股份有限公司是指由一定人数以上的股东组成，其全部资本分为等额股份，股东只就其所认股份即出资额对公司承担有限责任，公司只以其全部资产对公司债务承担责任的公司。</p>
-												<p>下列情况属于股份有限公司的是（ &nbsp;）</p>
-											</div>
-										</div>
-										<div class="options">
-											<div class="option">
-												<span class="lbl">A.</span> 甲公司和乙公司门前一片草地无人看管护理，便协商由两公司各负责一年
-											</div>
-											<div class="option">
-												<span class="lbl">B.</span>
-												甲公司进行改组，将全部资本分为五万股，由职工认购，并改名为“××有限责任公司”
-											</div>
-											<div class="option">
-												<span class="lbl">C.</span> 由原电子部下属的科研所改制成立国家控股的科研开发中心
-											</div>
-											<div class="option">
-												<span class="lbl">D.</span> 小张、小王和村里的其他人一起建起了一所村小学
-											</div>
-										</div>
-										<ul class="answers">
-											<li class="answer" data-answer-index="0"><span
-												class="answer-radio i-20"></span> A</li>
-											<li class="answer" data-answer-index="1"><span
-												class="answer-radio i-20"></span> B</li>
-											<li class="answer" data-answer-index="2"><span
-												class="answer-radio i-20"></span> C</li>
-											<li class="answer" data-answer-index="3"><span
-												class="answer-radio i-20"></span> D</li>
-										</ul>
-									</div>
-								</div>
-								<div class="question-wrap" data-id="37131"
-									data-question-index="0" data-is-multiple="false"
-									data-collected="false" id="question0">
-									<div class="question">
-										<div class="content clearfix">
-											<div class="index pull-left">1</div>
-											<div class="overflow">
-												<p>股份有限公司是指由一定人数以上的股东组成，其全部资本分为等额股份，股东只就其所认股份即出资额对公司承担有限责任，公司只以其全部资产对公司债务承担责任的公司。</p>
-												<p>下列情况属于股份有限公司的是（ &nbsp;）</p>
-											</div>
-										</div>
-										<div class="options">
-											<div class="option">
-												<span class="lbl">A.</span> 甲公司和乙公司门前一片草地无人看管护理，便协商由两公司各负责一年
-											</div>
-											<div class="option">
-												<span class="lbl">B.</span>
-												甲公司进行改组，将全部资本分为五万股，由职工认购，并改名为“××有限责任公司”
-											</div>
-											<div class="option">
-												<span class="lbl">C.</span> 由原电子部下属的科研所改制成立国家控股的科研开发中心
-											</div>
-											<div class="option">
-												<span class="lbl">D.</span> 小张、小王和村里的其他人一起建起了一所村小学
-											</div>
-										</div>
-										<ul class="answers">
-											<li class="answer" data-answer-index="0"><span
-												class="answer-radio i-20"></span> A</li>
-											<li class="answer" data-answer-index="1"><span
-												class="answer-radio i-20"></span> B</li>
-											<li class="answer" data-answer-index="2"><span
-												class="answer-radio i-20"></span> C</li>
-											<li class="answer" data-answer-index="3"><span
-												class="answer-radio i-20"></span> D</li>
-										</ul>
-									</div>
-								</div>
+								#{/list}
 								<div class="split-box">
 									<span class="sprite sprite-box-split-l"></span><span
 										class="repeat-x box-split"></span><span
@@ -317,10 +167,13 @@
 											<table class="table">
 												<tbody>
 													<tr>
-														<td class="col-0 "><a data-correct=""
+													#{list items:exercise,as:'e'}
+														<td class="col-0 "><a data-id="${e._id}_question_sheet"
 															data-question-index="0" data-chapter-index="0"
-															class="question ">1</a></td>
+															href="#question${e_index}"
+															class="question">${e_index}</a></td>
 														<td colspan="5"></td>
+													#{/list}
 													</tr>
 												</tbody>
 											</table>
@@ -331,6 +184,9 @@
 						</div>
 					</div>
 				</div>
+				<form id="answer-form" method="post" action="@{Exercises.end}">
+					<input type="hidden" name="answer" value="" />
+				</form>
 				<div class="box-inner-wrap sidebar-wrap">
 					<div class="sprite sprite-box-inner-lt"></div>
 					<div class="repeat-x box-inner-t"></div>
@@ -360,6 +216,7 @@
 </body>
 <script>
 	var countId;
+	var result = {};
 	$(function() {
 		var start = new Date(2013,01,01);
 		startCount(start);
@@ -381,6 +238,23 @@
 				$(".sidebar-wrap").offset({top:107})
 			}
 		})
+		$(".answers li").click(function(){
+			$(this).siblings().removeClass("active");
+			$(this).addClass("active");
+			var answerId = $(this).attr("data-answer-id");
+			var questionId = $(this).closest(".question-wrap").data("id");
+			$("a[data-id=" + questionId + "_question_sheet]").addClass("answered");
+			result[questionId] = answerId;
+		})
+		$(".commit-exercise").click(function() {
+			var str = "";
+			for (var o in result) {
+				str += o + "_" + result[o] + ",";
+			}
+			$("input[name='answer']").val(str.length > 1? str.substring(0,str.length-1) : str);
+			console.log($("input[name='answer']").val());
+			$("#answer-form").submit();
+		})
 	})
 	function startCount(start) {
 		countId = setInterval(function() {
@@ -388,5 +262,8 @@
 			$(".timer").text(start.format("mm:ss"));
 		},1000)
 	}
+</script>
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 </html>
