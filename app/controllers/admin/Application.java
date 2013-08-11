@@ -161,6 +161,7 @@ public class Application extends Controller {
 			ue.status =UserExerciseStatus.START;
 			ue.user = user;
 			ue.subject = sb;
+			ue.tags = sb.tags;
 			ue.save();
 		}
 		
