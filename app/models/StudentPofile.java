@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,10 +16,10 @@ public class StudentPofile extends Model{
 	public User user;
 	
 	@Reference
-	public List<Tag> grades;
+	public List<Tag> grades = new ArrayList<Tag>();
 	
 	@Reference
-	public List<Tag> courses;
+	public List<Tag> courses = new ArrayList<Tag>();
 	
 	@Reference
 	public List<ScheduleInfo> schedule;

@@ -15,7 +15,7 @@ public class ScheduleInfo extends Model {
 	
 	public int score;
 	
-	public Date createAt;
+	public Date createAt = new Date();
 	
-	public Date UpdateAt;
+	public Date UpdateAt = new Date();
 }

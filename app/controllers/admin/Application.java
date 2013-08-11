@@ -9,9 +9,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
 import models.Menu;
+import models.ScheduleInfo;
+import models.StudentPofile;
 import models.Tag;
+import models.User;
+import models.enums.RoleType;
 import controllers.Public;
 import controllers.wither.LogPrinter;
 import play.Play;
@@ -115,9 +118,30 @@ public class Application extends Controller {
 		
 	}
 	
-	public static void get(){
+	public static void initUserExercise(){
 		
+		User user = User.find("userName", "test1").first();
+		if(user == null){
+			user = new User("test1","123456");
+			user.roleType = RoleType.STUDENT;
+			user.save();
+		}
 		
+		StudentPofile st = StudentPofile.find("user", user).first();
+		if(st == null){
+			st = new StudentPofile();
+			st.user = user;
+			Tag tag1 = Tag.filter("name", "英语").first();
+			Tag tag2 = Tag.filter("name", "数学").first();
+			st.courses.add(tag1);
+			st.courses.add(tag2);
+			Tag tag3 = Tag.filter("name", "高一").first();
+			st.grades.add(tag3);
+			ScheduleInfo sif = new ScheduleInfo();
+			sif.tag  = Tag.filter("name", "元素与集合的概念").first();
+			sif.save();
+			st.schedule.add(sif);
+		}
 		
 	}
 }
