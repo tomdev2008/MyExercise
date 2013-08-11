@@ -32,12 +32,13 @@ public class Exercises extends Controller {
 	
 	public static void start(String courseName){
 		Tag course = TagService.getTag(courseName);
-		List<UserExercise> exercise = UserExercise.filter("subject.tags", course).asList();
+		List<Subject> subjects = Subject.filter("tags", course).asList();
+		List<UserExercise> exercise = UserExercise.findAll();
 		render(exercise);
 	}
 	
 	
-	public static void done(String answer){
+	public static void end(String answer){
 		String[] an = answer.split(",");
 		List<UserExercise> exercises = new ArrayList();
 		for(String a :an){
