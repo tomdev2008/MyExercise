@@ -46,6 +46,7 @@ public class Exercises extends Controller {
 			String[] item = a.split("_");
 			UserExercise  userExercise = UserExercise.findById(item[0]);
 			int cnt =0;
+			userExercise.userAnswer = new ArrayList<Option>();
 			for(int i=1;i< item.length;i++){
 				Option  option = Option.findById(item[1]);
 				userExercise.userAnswer.add(option);
