@@ -37,7 +37,7 @@ public class Exercises extends Controller {
 	}
 	
 	
-	public static void done(String answer){
+	public static void end(String answer){
 		String[] an = answer.split(",");
 		List<UserExercise> exercises = new ArrayList();
 		for(String a :an){
