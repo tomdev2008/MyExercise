@@ -13,8 +13,8 @@ public class Application extends Controller {
         render();
     }
     
-    public static void doExercise() {
-    	render();
+    public static void doExercise(String courseName) {
+    	render(courseName);
     }
     
     public static void result() {

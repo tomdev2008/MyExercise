@@ -23,6 +23,12 @@
 	float:left;
 	margin-left:0px;
 }
+.question-sheet-wrap .question-sheet{
+	width:225px;
+}
+.exercise-wrap .exercise-ft{
+	margin-top:-6px;
+}
 </style>
 </head>
 %{
@@ -144,7 +150,22 @@
 								</div>
 							</div>
 						</div>
-						<div class="exercise-ft" style="height: 57px;">
+					</div>
+				</div>
+				<form id="answer-form" method="post" action="@{Exercises.end}">
+					<input type="hidden" name="answer" value="" />
+				</form>
+				<div class="box-inner-wrap sidebar-wrap">
+					<div class="sprite sprite-box-inner-lt"></div>
+					<div class="repeat-x box-inner-t"></div>
+					<div class="sprite sprite-box-inner-rt"></div>
+					<div class="repeat-y box-inner-r"></div>
+					<div class="sprite sprite-box-inner-rb"></div>
+					<div class="repeat-y box-inner-l"></div>
+					<div class="sprite sprite-box-inner-lb"></div>
+					<div class="repeat-x box-inner-b"></div>
+					<div class="box-inner">
+					<div class="exercise-ft" style="height: 57px;">
 							<div class="question-sheet-wrap sheet-wrap" style="">
 								<div class="box-gray-wrap">
 									<div class="repeat-x box-gray-t"></div>
@@ -182,21 +203,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<form id="answer-form" method="post" action="@{Exercises.end}">
-					<input type="hidden" name="answer" value="" />
-				</form>
-				<div class="box-inner-wrap sidebar-wrap">
-					<div class="sprite sprite-box-inner-lt"></div>
-					<div class="repeat-x box-inner-t"></div>
-					<div class="sprite sprite-box-inner-rt"></div>
-					<div class="repeat-y box-inner-r"></div>
-					<div class="sprite sprite-box-inner-rb"></div>
-					<div class="repeat-y box-inner-l"></div>
-					<div class="sprite sprite-box-inner-lb"></div>
-					<div class="repeat-x box-inner-b"></div>
-					<div class="box-inner">
 						<div class="sidebar">
 							<div class="side-top sprite sprite-side-top-bg">
 								<span class="sprite sprite-clock"></span> <span class="text">已用时</span>
@@ -236,10 +242,10 @@
 			startCount(start);
 		})
 		$(window).bind("scroll", function() {
-			if ($(window).scrollTop() > 107) {
+			if ($(window).scrollTop() > 128) {
 				$(".sidebar-wrap").offset({top:$(window).scrollTop()})
 			} else {
-				$(".sidebar-wrap").offset({top:107})
+				$(".sidebar-wrap").offset({top:128})
 			}
 		})
 		$(".answers li").click(function(){
