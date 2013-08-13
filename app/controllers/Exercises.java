@@ -2,7 +2,9 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import models.Option;
 import models.StudentPofile;
@@ -103,5 +105,26 @@ public class Exercises extends Controller {
 		}	
 		
 		render(exercises,correctCnt,mistakeCnt);
+	}
+	
+	public static void getTag(){
+		String courseName ="";
+		Tag parent = TagService.getTag(courseName);
+		
+		List<Tag> tags = new ArrayList<Tag>();
+		getTag(parent,tags);
+		
+	}
+	
+	public static List<Tag> getTag(Tag parent,List<Tag> allTags){
+		List<Tag> tags = Tag.find("context", parent).asList();
+		for(Tag tag:tags){
+			tags = getTag(tag,allTags);
+			if(tags.size() ==0){
+				allTags.add(tag);
+				return tags;
+			}
+		}
+		return tags;
 	}
 }

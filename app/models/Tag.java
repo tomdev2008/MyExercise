@@ -17,6 +17,10 @@ public class Tag extends Model{
 	
 	public int index;
 	
+	/**
+	 知识点预测分数(KTS=KnowledgeTagScore)
+	 学科预计分数(USS=UserSubjectScore)
+	 * */
 	public Map info;
 	
 	
