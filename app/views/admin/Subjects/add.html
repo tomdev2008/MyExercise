@@ -157,6 +157,7 @@ Preview.callback.autoReset = true;  // make sure it can run more than once
 			<div class="left">选项:</div>
 			<div class="right">
 				<input type="text" name="option" >
+				<input type="checkbox" name="isAnswer" value ="0" >这是正确答案<br>
 			</div>
 		</div>
 	</div>
@@ -179,9 +180,10 @@ Preview.callback.autoReset = true;  // make sure it can run more than once
 </form>
 </div>
 <script>
+
 function addOption() {
-	$("#options").append('<div class="line"><div class="left">选项：</div><div class="right"><input type="text" name="option" ></div><div class="say" style="border:1px solid black;width:15px;padding-left:8px;cursor: pointer;"  onclick="removeOption(this)">X</div></div>');
-	//reNum();
+	$("#options").append('<div class="line"><div class="left">选项：</div><div class="right"><input type="text" name="option" ><input type="checkbox" name="isAnswer" value ="" >这是正确答案<br></div><div class="say" style="border:1px solid black;width:15px;padding-left:8px;cursor: pointer;"  onclick="removeOption(this)">X</div></div>');
+	reNum();
 }
 function removeOption(el) {
 	if ($("#options").find(".line").length < 2) {
@@ -189,18 +191,18 @@ function removeOption(el) {
 		return;
 	}
 	$(el).closest(".line").remove();
-	//reNum();
+	reNum();
 }
-/**
+
 function reNum() {
 	var i = 1;
-	$("#options").find("input[type=file]").each(function() {
-		$(this).attr("name", "otion_" + i);
+	$("input[type=checkbox]").each(function() {
+		$(this).attr("value", i);
 		i++;
 	})
-	$("#maxFile").val(i-1);
+	//$("#maxFile").val(i-1);
 }
-**/
+
 $(function() {
 	$("#submitButton").click(function() {
 		$("body").mask("提交中。。。。");

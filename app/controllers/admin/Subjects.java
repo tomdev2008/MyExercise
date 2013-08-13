@@ -43,6 +43,7 @@ public class Subjects extends  Controller{
 	public static void create(String title,String subjectType,String tags,String solution) {
 		
 		String[] options = params.getAll("option");
+		String[] answer = params.getAll("isAnswer");
 		Subject sb = new Subject();
 		sb.title =title;
 		int cnt =1;
@@ -51,8 +52,10 @@ public class Subjects extends  Controller{
 			o.content=option;
 			o.save();
 			sb.options.add(o);
-			if(cnt ==1){
-				sb.answer.add(o);
+			for(String t :answer ){
+				if(cnt == Integer.valueOf(t)){
+					sb.answer.add(o);
+				}
 			}
 			cnt++;
 		}
