@@ -38,6 +38,8 @@ public class Subject extends Model{
     public List<Option> answer= new ArrayList();
 
     public String solution;
+    
+    public int weight=0;
 
     public int frequency = 14;
 
