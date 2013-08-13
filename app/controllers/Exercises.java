@@ -122,6 +122,7 @@ public class Exercises extends Controller {
 			tags = getTag(tag,allTags);
 			if(tags.size() ==0){
 				allTags.add(tag);
+				return tags;
 			}
 		}
 		return tags;
