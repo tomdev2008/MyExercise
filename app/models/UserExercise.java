@@ -30,12 +30,13 @@ public class UserExercise extends Model {
 	public UserExerciseStatus status;
 	
 	public int currentScore;
-	
+	public int displayCount;
 	public int completeCount;
 	public int correctCount;
 	public int mistakeCount;
 	public int weight;
 
+	public Date nextDate = new Date();
 	public Date createAt = new Date();
 
     public Date updateAt = new Date();
