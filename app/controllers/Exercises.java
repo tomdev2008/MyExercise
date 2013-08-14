@@ -7,12 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 import models.Option;
+import models.ScheduleInfo;
 import models.StudentPofile;
 import models.Subject;
 import models.Tag;
 import models.User;
 import models.UserExercise;
+import models.enums.UserExerciseStatus;
 import play.mvc.Controller;
+import play.mvc.Util;
 import service.TagService;
 
 public class Exercises extends Controller {
@@ -34,8 +37,62 @@ public class Exercises extends Controller {
 	
 	public static void start(String courseName){
 		Tag course = TagService.getTag(courseName);
-		List<UserExercise> exercise = UserExercise.findAll();
-		render(exercise);
+		User user = Users.getLoginUser();
+		if(user == null){
+			user = User.find("userName", "test1").first();
+		}
+		StudentPofile profile = StudentPofile.filter("user", user).first();
+		
+		if(profile == null  
+				|| profile.grades == null  
+				|| profile.courses ==null 
+				|| profile.schedule == null){
+			profile = new StudentPofile();
+			//profile.grades.add((Tag)Tag.find("name", "高一").first());
+			List<Tag> list = new ArrayList<Tag>();
+			List<Tag> parentTag = null;
+			if(courseName.equals("数学")){
+				parentTag = Tag.find("name", "mathTag").asList();
+			}else if(courseName.equals("英语")){
+				parentTag = Tag.find("name", "eglishTag").asList();
+			}
+			list = getTag(parentTag,list);
+			for(Tag t:list){
+				ScheduleInfo sinfo = new ScheduleInfo();
+				sinfo.user = user;
+				sinfo.course = course;
+				//sinfo.grade = grade;
+				sinfo.tag = t;
+				sinfo.createAt = new Date();
+				sinfo.score=0;
+				sinfo.save();
+				profile.schedule.add(sinfo);
+			}
+			profile.user = user;
+			profile.save();
+
+		}
+		
+		List<UserExercise> exercises = UserExercise.find("user", user).filter("tags", course).asList();
+		if(exercises.size() == 0){
+			List<ScheduleInfo> list = ScheduleInfo.find("user", user).asList();
+			List<Tag> tags= new ArrayList<Tag>();
+			for(ScheduleInfo info:list){
+				tags.add(info.tag);
+			}
+			List<Subject> sbs = Subject.find("tags in", tags).asList();
+			for(Subject sb :sbs){
+				UserExercise ue = new  UserExercise();
+				ue.subject = sb;
+				ue.createAt = new Date();
+				ue.tags = sb.tags;
+				ue.status = UserExerciseStatus.START;
+				ue.user = user;
+				ue.save();
+				exercises.add(ue);
+			}
+		}
+		render(exercises);
 	}
 	
 	
@@ -112,19 +169,35 @@ public class Exercises extends Controller {
 		Tag parent = TagService.getTag(courseName);
 		
 		List<Tag> tags = new ArrayList<Tag>();
-		getTag(parent,tags);
+		//getTag(parent);
 		
 	}
 	
-	public static List<Tag> getTag(Tag parent,List<Tag> allTags){
-		List<Tag> tags = Tag.find("context", parent).asList();
+	@Util
+	public static List<Tag> getTag(List<Tag>  tags ,List<Tag> allTags){
+		
 		for(Tag tag:tags){
-			tags = getTag(tag,allTags);
-			if(tags.size() ==0){
+			List<Tag> temp = Tag.filter("context", tag).asList();
+			if(temp.size() ==0){
 				allTags.add(tag);
-				return tags;
+				System.out.println(tag.name);
+			}else{
+				getTag(temp,allTags);
 			}
+			
 		}
-		return tags;
+		return allTags;
+	}
+	
+	public  static void tesTags(){
+		List<Tag> parents = Tag.find("name","MathTag").asList();
+		List<Tag> list = new ArrayList<Tag>();
+		list = getTag(parents,list);
+		
+		String txt ="";
+		for(Tag t:list){
+			txt= txt+"("+t.name+")";
+		}
+		renderText(txt);
 	}
 }

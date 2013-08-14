@@ -11,6 +11,15 @@ import play.modules.morphia.Model;
 public class ScheduleInfo extends Model {
 
 	@Reference
+	public User user;
+	
+	@Reference
+	public Tag course;
+	
+	@Reference
+	public Tag grade;
+	
+	@Reference
 	public Tag tag;
 	
 	public int score;
