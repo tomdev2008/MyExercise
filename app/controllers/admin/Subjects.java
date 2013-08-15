@@ -40,7 +40,7 @@ public class Subjects extends  Controller{
         render();
     }
 	
-	public static void create(String title,String subjectType,String tags,String solution) {
+	public static void create(String title,String subjectType,String course,String grade,String tags,String solution) {
 		
 		String[] options = params.getAll("option");
 		String[] answer = params.getAll("isAnswer");
@@ -64,7 +64,10 @@ public class Subjects extends  Controller{
 			Tag t = TagService.getTag(tag);
 			sb.tags.add(t);
 		}
-		
+		Tag t = TagService.getTag(course);
+		sb.course =t;
+		t = TagService.getTag(grade);
+		sb.grade =t;
 		sb.owner = UserService.getUser("admin");
 		sb.status = SubjectStatus.VALID;
 		sb.type = SubjectType.valueOf(subjectType);

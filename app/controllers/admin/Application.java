@@ -13,7 +13,7 @@ import java.util.Set;
 
 import models.Menu;
 import models.ScheduleInfo;
-import models.StudentPofile;
+import models.StudentProfile;
 import models.Subject;
 import models.Tag;
 import models.User;
@@ -132,9 +132,9 @@ public class Application extends Controller {
 			user.save();
 		}
 		
-		StudentPofile st = StudentPofile.find("user", user).first();
+		StudentProfile st = StudentProfile.find("user", user).first();
 		if(st == null){
-			st = new StudentPofile();
+			st = new StudentProfile();
 			st.user = user;
 			
 			Tag tag1 = Tag.filter("name", "英语").first();

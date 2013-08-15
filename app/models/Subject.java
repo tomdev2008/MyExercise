@@ -24,8 +24,13 @@ public class Subject extends Model{
     public SubjectStatus status;
 
     public SubjectType type;
-
-  
+    
+    @Reference
+    public Tag course;
+    
+    @Reference
+    public Tag grade;
+    
     @Reference
     public Set<Tag> tags = new HashSet();
 

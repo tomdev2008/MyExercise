@@ -19,14 +19,22 @@ public class UserExercise extends Model {
 	@Reference
 	public User user;
 	
+    @Reference
+    public Tag course;
+    
+    @Reference
+    public Tag grade;
+    
 	@Reference
 	public Set<Tag> tags = new HashSet();
 	   
 	@Reference
 	@Unique
 	public Subject subject;
+	
 	@Reference
 	public List<Option>  userAnswer;
+	
 	public UserExerciseStatus status;
 	
 	public int currentScore;

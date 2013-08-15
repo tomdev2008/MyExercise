@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.code.morphia.Key;
+
 import models.Option;
 import models.ScheduleInfo;
-import models.StudentPofile;
+import models.StudentProfile;
 import models.Subject;
 import models.Tag;
 import models.User;
@@ -23,7 +25,7 @@ public class Exercises extends Controller {
 	public static void index(){
 		
 		User user = Users.getLoginUser();
-		StudentPofile profile = StudentPofile.filter("user", user).first();
+		StudentProfile profile = StudentProfile.filter("user", user).first();
 		if(profile == null  
 				|| profile.grades == null  
 				|| profile.courses ==null 
@@ -41,22 +43,22 @@ public class Exercises extends Controller {
 		if(user == null){
 			user = User.find("userName", "test1").first();
 		}
-		StudentPofile profile = StudentPofile.filter("user", user).first();
+		StudentProfile profile = StudentProfile.filter("user", user).first();
 		
 		if(profile == null  
-				|| profile.grades == null  
+				//|| profile.grades == null  
 				|| profile.courses ==null 
 				|| profile.schedule == null){
-			profile = new StudentPofile();
+			profile = new StudentProfile();
 			//profile.grades.add((Tag)Tag.find("name", "高一").first());
 			List<Tag> list = new ArrayList<Tag>();
 			List<Tag> parentTag = null;
 			if(courseName.equals("数学")){
-				parentTag = Tag.find("name", "mathTag").asList();
+				parentTag = Tag.find("name", "MathTag").asList();
 			}else if(courseName.equals("英语")){
-				parentTag = Tag.find("name", "eglishTag").asList();
+				parentTag = Tag.find("name", "English").asList();
 			}
-			list = getTag(parentTag,list);
+			getTag(parentTag,list);
 			for(Tag t:list){
 				ScheduleInfo sinfo = new ScheduleInfo();
 				sinfo.user = user;
@@ -68,6 +70,9 @@ public class Exercises extends Controller {
 				sinfo.save();
 				profile.schedule.add(sinfo);
 			}
+			profile.courses.add(course);
+			//profile.grades
+			//profile.currentGrade;
 			profile.user = user;
 			profile.save();
 
@@ -76,13 +81,15 @@ public class Exercises extends Controller {
 		List<UserExercise> exercises = UserExercise.find("user", user).filter("tags", course).asList();
 		if(exercises.size() == 0){
 			List<ScheduleInfo> list = ScheduleInfo.find("user", user).asList();
-			List<Tag> tags= new ArrayList<Tag>();
+			List<Key> tags= new ArrayList<Key>();
 			for(ScheduleInfo info:list){
-				tags.add(info.tag);
+				tags.add(Tag.filter("name", info.tag.name).asKeyList().get(0));
 			}
-			List<Subject> sbs = Subject.find("tags in", tags).asList();
+			List<Subject> sbs = Subject.filter("tags in", tags).asList();
 			for(Subject sb :sbs){
 				UserExercise ue = new  UserExercise();
+				ue.course = sb.course;
+				ue.grade = sb.grade;
 				ue.subject = sb;
 				ue.createAt = new Date();
 				ue.tags = sb.tags;

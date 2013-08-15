@@ -67,6 +67,27 @@ input[type=text] {
 		</div>
 	</div>
 	<div class="line">
+		<div class="left">course:</div>
+		<div class="right">
+        		<li>${item.course.name}</li>
+        </div>
+	</div>
+	<div class="line">
+		<div class="left">course:</div>
+		<div class="right">
+        	<li>${item.grade.name}</li>
+        </div>
+    		
+	</div>
+	<div class="line">
+		<div class="left">Tag:</div>
+		<div class="right">
+			#{list items:item.tags, as:'tag' }
+        		<li>${tag.getFullTagName()}</li>
+    		#{/list}
+		</div>
+	</div>
+	<div class="line">
 		<div class="left">Tag:</div>
 		<div class="right">
 			#{list items:item.tags, as:'tag' }
