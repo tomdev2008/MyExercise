@@ -70,7 +70,7 @@ public class Exercises extends Controller {
 				sinfo.save();
 				profile.schedule.add(sinfo);
 			}
-			profile.courses.add(course);
+			profile.courses.put(course,0L);
 			//profile.grades
 			//profile.currentGrade;
 			profile.user = user;
@@ -95,6 +95,7 @@ public class Exercises extends Controller {
 				ue.tags = sb.tags;
 				ue.status = UserExerciseStatus.START;
 				ue.user = user;
+				ue.subjectCreateAt = sb.createAt;
 				ue.save();
 				exercises.add(ue);
 			}
@@ -146,21 +147,18 @@ public class Exercises extends Controller {
 			 */
 			
 			if(userExercise.subject.answer.size() == cnt){
-				userExercise.correctCount = userExercise.correctCount+1;
+				UserExercise.o().inc("correctCount, displayCount", 1, 1).update("_id", userExercise.getId());
 				correctCnt++;
 				userExercise.currentScore = 1;
-				userExercise.completeCount= userExercise.completeCount+1;
 			}else{
 				if(userExercise.userAnswer.size() ==0){
 					userExercise.currentScore = -1;
 				}else{
-					userExercise.mistakeCount = userExercise.mistakeCount+1;
+					UserExercise.o().inc("mistakeCount, displayCount", 1, 1).update("_id", userExercise.getId());
 					mistakeCnt++;
 					userExercise.currentScore = 0;
-					userExercise.completeCount= userExercise.completeCount+1;
 				}
 			}
-			userExercise.displayCount = userExercise.displayCount +1;
 			//TODO:下次可以展现的时间
 			userExercise.nextDate = new Date();
 			userExercise.updateAt = new Date();

@@ -2,7 +2,9 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import play.modules.morphia.Model;
 
@@ -22,7 +24,7 @@ public class StudentProfile extends Model{
 	public Tag currentGrade;
 	
 	@Reference
-	public List<Tag> courses = new ArrayList<Tag>();
+	public Map<Tag,Long> courses = new HashMap<Tag,Long>();
 	
 	@Reference
 	public List<ScheduleInfo> schedule = new ArrayList<ScheduleInfo>();

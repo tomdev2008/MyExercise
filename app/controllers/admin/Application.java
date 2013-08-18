@@ -139,8 +139,8 @@ public class Application extends Controller {
 			
 			Tag tag1 = Tag.filter("name", "英语").first();
 			Tag tag2 = Tag.filter("name", "数学").first();
-			st.courses.add(tag1);
-			st.courses.add(tag2);
+			st.courses.put(tag1,0L);
+			st.courses.put(tag2,0L);
 			Tag tag3 = Tag.filter("name", "高一").first();
 			st.grades.add(tag3);
 			ScheduleInfo sif = new ScheduleInfo();

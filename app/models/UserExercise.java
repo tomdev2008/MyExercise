@@ -43,10 +43,11 @@ public class UserExercise extends Model {
 	public int correctCount;
 	public int mistakeCount;
 	public int weight;
-
+	public int isFC;
+	public int isSC;
 	public Date nextDate = new Date();
+	public Date subjectCreateAt = new Date();
 	public Date createAt = new Date();
-
     public Date updateAt = new Date();
 	
 }
