@@ -66,7 +66,7 @@ public class Exercises extends Controller {
 				//sinfo.grade = grade;
 				sinfo.tag = t;
 				sinfo.createAt = new Date();
-				sinfo.score=0;
+				sinfo.KTS=0;
 				sinfo.save();
 				profile.schedule.add(sinfo);
 			}

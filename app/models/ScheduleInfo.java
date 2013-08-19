@@ -22,7 +22,8 @@ public class ScheduleInfo extends Model {
 	@Reference
 	public Tag tag;
 	
-	public int score;
+	/**预测分数*/
+	public long KTS;
 	
 	public Date createAt = new Date();
 	

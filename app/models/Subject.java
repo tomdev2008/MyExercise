@@ -48,11 +48,11 @@ public class Subject extends Model{
 
     public int frequency = 14;
 
-    public double  ACR=0;
+    public long  ACR=0;
 
-    public double FCR =0;
+    public long FCR =0;
 
-    public double SCR =0;
+    public long SCR =0;
 
     @Reference
     public User owner;
