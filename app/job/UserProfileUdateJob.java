@@ -33,8 +33,5 @@ public class UserProfileUdateJob extends Job {
 		StudentProfile sp = StudentProfile.filter("user", user).filter("course", course).first();
 		sp.courses.put(course, CR/All);
 		sp.save();
-		
-		
-		
 	}
 }

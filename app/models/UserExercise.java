@@ -37,6 +37,8 @@ public class UserExercise extends Model {
 	
 	public UserExerciseStatus status;
 	
+	/**剩余重复次数(URT=User should Reapet Time)*/
+	public int URT;
 	public int currentScore;
 	public int displayCount;
 	public int completeCount;
