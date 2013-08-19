@@ -62,6 +62,7 @@ public class SubjectUpdateJob extends Job {
 					 weight +=3;
 				}
 			}
+			if()
 			
 			
 		}
