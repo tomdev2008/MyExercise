@@ -24,7 +24,13 @@ public class TagService {
 		if(query.count()==0){
 			t = addTag(name);
 		}else{
-			t = query.first();
+			if(query.count()>1){
+				Tag parent = Tag.filter("name", tag[tag.length-2]).first();
+				t = query.filter("context", parent).first();
+			}else{
+				t = query.first();
+			}
+			
 		}
 		return t;
 	}

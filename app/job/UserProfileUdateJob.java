@@ -63,7 +63,7 @@ public class UserProfileUdateJob extends Job {
 		long All = query.sum("displayCount");
 		long USS = CR/All;
 		StudentProfile sp = StudentProfile.filter("user", user).filter("course", course).first();
-		sp.courses.put(course, USS);
+		sp.courses.put((String)course.getId(), USS);
 		sp.save();
 		
 		Map<Tag,ScheduleInfo> map = new HashMap<Tag,ScheduleInfo>();

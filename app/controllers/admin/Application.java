@@ -111,7 +111,7 @@ public class Application extends Controller {
 		reader.close();
 		
 		
-		file = Play.getFile("/tags/subject-1.txt");
+		file = Play.getFile("/tags/course-1.txt");
 		reader = new FileReader(file);
 		br = new BufferedReader(reader);
 		
@@ -132,38 +132,38 @@ public class Application extends Controller {
 			user.save();
 		}
 		
-		StudentProfile st = StudentProfile.find("user", user).first();
-		if(st == null){
-			st = new StudentProfile();
-			st.user = user;
-			
-			Tag tag1 = Tag.filter("name", "英语").first();
-			Tag tag2 = Tag.filter("name", "数学").first();
-			st.courses.put(tag1,0L);
-			st.courses.put(tag2,0L);
-			Tag tag3 = Tag.filter("name", "高一").first();
-			st.grades.add(tag3);
-			ScheduleInfo sif = new ScheduleInfo();
-			sif.tag  = Tag.filter("name", "元素与集合的概念").first();
-			sif.save();
-			st.schedule.add(sif);
-			st.save();
-		}
-		
-		//Set<Tag> tags = new HashSet();
-		//tags.add((Tag)Tag.filter("name", "数学").first());
-		//tags.add((Tag)Tag.filter("name", "高一").first());
-		//tags.add((Tag)Tag.filter("name", "元素与集合的概念").first());
-		//List<Subject> sbs = Subject.filter("tags", tags).asList();
-		List<Subject> sbs = Subject.findAll();
-		for(Subject sb:sbs){
-			UserExercise ue = new UserExercise();
-			ue.status =UserExerciseStatus.START;
-			ue.user = user;
-			ue.subject = sb;
-			ue.tags = sb.tags;
-			ue.save();
-		}
+//		StudentProfile st = StudentProfile.find("user", user).first();
+//		if(st == null){
+//			st = new StudentProfile();
+//			st.user = user;
+//			
+//			Tag tag1 = Tag.filter("name", "英语").first();
+//			Tag tag2 = Tag.filter("name", "数学").first();
+//			st.courses.put(tag1,0L);
+//			st.courses.put(tag2,0L);
+//			Tag tag3 = Tag.filter("name", "高一").first();
+//			st.grades.add(tag3);
+//			ScheduleInfo sif = new ScheduleInfo();
+//			sif.tag  = Tag.filter("name", "元素与集合的概念").first();
+//			sif.save();
+//			st.schedule.add(sif);
+//			st.save();
+//		}
+//		
+//		//Set<Tag> tags = new HashSet();
+//		//tags.add((Tag)Tag.filter("name", "数学").first());
+//		//tags.add((Tag)Tag.filter("name", "高一").first());
+//		//tags.add((Tag)Tag.filter("name", "元素与集合的概念").first());
+//		//List<Subject> sbs = Subject.filter("tags", tags).asList();
+//		List<Subject> sbs = Subject.findAll();
+//		for(Subject sb:sbs){
+//			UserExercise ue = new UserExercise();
+//			ue.status =UserExerciseStatus.START;
+//			ue.user = user;
+//			ue.subject = sb;
+//			ue.tags = sb.tags;
+//			ue.save();
+//		}
 		
 	}
 }

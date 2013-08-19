@@ -54,7 +54,7 @@ public class Exercises extends Controller {
 			List<Tag> list = new ArrayList<Tag>();
 			List<Tag> parentTag = null;
 			if(courseName.equals("数学")){
-				parentTag = Tag.find("name", "MathTag").asList();
+				parentTag = Tag.find("name", "Math").asList();
 			}else if(courseName.equals("英语")){
 				parentTag = Tag.find("name", "English").asList();
 			}
@@ -70,7 +70,7 @@ public class Exercises extends Controller {
 				sinfo.save();
 				profile.schedule.add(sinfo);
 			}
-			profile.courses.put(course,0L);
+			profile.courses.put((String)course.getId(),0L);
 			//profile.grades
 			//profile.currentGrade;
 			profile.user = user;

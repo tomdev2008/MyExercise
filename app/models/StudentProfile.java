@@ -3,8 +3,12 @@ package models;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import org.bson.types.ObjectId;
 
 import play.modules.morphia.Model;
 
@@ -23,8 +27,8 @@ public class StudentProfile extends Model{
 	@Reference 
 	public Tag currentGrade;
 	
-	@Reference
-	public Map<Tag,Long> courses = new HashMap<Tag,Long>();
+	
+	public Map<String,Long> courses = new HashMap<String,Long>();
 	
 	@Reference
 	public List<ScheduleInfo> schedule = new ArrayList<ScheduleInfo>();

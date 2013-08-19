@@ -39,10 +39,14 @@ public class Tags extends Controller {
         render();
     }
 	
-	public static void create(String tagName) {
+	public static void create(String tagName,String isImportant) {
 		
 		if(!TagService.isExist(tagName)){
-			TagService.addTag(tagName);
+			Tag t =TagService.addTag(tagName);
+			if(StringUtils.isNotBlank(isImportant)){
+				t.info.put("isImportant", "1");
+				t.save();
+			}
 		}
 		index();
 		

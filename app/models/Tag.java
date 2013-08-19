@@ -1,5 +1,6 @@
 package models;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import play.modules.morphia.Model;
@@ -17,7 +18,7 @@ public class Tag extends Model{
 	
 	public int index;
 	
-	public Map info;
+	public Map<String,String> info = new HashMap<String,String>();
 	
 	
 	public Tag(String name,Tag tagContext){
