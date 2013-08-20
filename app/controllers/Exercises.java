@@ -70,7 +70,7 @@ public class Exercises extends Controller {
 				sinfo.save();
 				profile.schedule.add(sinfo);
 			}
-			profile.courses.put((String)course.getId(),0L);
+			profile.courses.put(course.getId().toString(),0L);
 			//profile.grades
 			//profile.currentGrade;
 			profile.user = user;
@@ -78,7 +78,7 @@ public class Exercises extends Controller {
 
 		}
 		
-		List<UserExercise> exercises = UserExercise.find("user", user).filter("tags", course).asList();
+		List<UserExercise> exercises = UserExercise.find("user", user).filter("course", course).asList();
 		if(exercises.size() == 0){
 			List<ScheduleInfo> list = ScheduleInfo.find("user", user).asList();
 			List<Key> tags= new ArrayList<Key>();

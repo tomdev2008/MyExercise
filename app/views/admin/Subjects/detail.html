@@ -79,14 +79,7 @@ input[type=text] {
         </div>
     		
 	</div>
-	<div class="line">
-		<div class="left">Tag:</div>
-		<div class="right">
-			#{list items:item.tags, as:'tag' }
-        		<li>${tag.getFullTagName()}</li>
-    		#{/list}
-		</div>
-	</div>
+
 	<div class="line">
 		<div class="left">Tag:</div>
 		<div class="right">
@@ -115,21 +108,21 @@ input[type=text] {
 		<div class="line">
 		<div class="left">accuracyAll:</div>
 		<div class="right">
-			${item.accuracyAll}
+			${item.ACR}
 		</div>
 	</div>
 	
 		<div class="line">
 		<div class="left">accuracyOnce:</div>
 		<div class="right">
-			${item.accuracyOnce}
+			${item.FCR}
 		</div>
 	</div>
 	
 	<div class="line">
 		<div class="left">accuracyTwice:</div>
 		<div class="right">
-			${item.accuracyTwice}
+			${item.SCR}
 		</div>
 	</div>
 	
