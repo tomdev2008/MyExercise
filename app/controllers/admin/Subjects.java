@@ -77,9 +77,66 @@ public class Subjects extends  Controller{
     }
 	
 	public static void update(final String id){
-		render();
+		Subject item = Subject.findById(id);
+		render(item);
 	}
 	
+	public static void modify(String subjectId, String title,String subjectType,String course,String grade,String tags,String solution, String removeTagIds, String removeOptionIds) {
+		Subject sb = Subject.findById(subjectId);
+		if (StringUtils.isNotBlank(removeTagIds)) {
+			String[] removeTags = removeTagIds.split(",");
+			if (removeTags.length > 0) {
+				for (String tag : removeTags) {
+					Tag t = Tag.findById(tag);
+					sb.tags.remove(t);
+				}
+			}
+		}
+		if (StringUtils.isNotBlank(removeOptionIds)) {
+			String[] removeOptions = removeOptionIds.split(",");
+			if (removeOptions.length > 0) {
+				for (String option : removeOptions) {
+					Option o = Option.findById(option);
+					sb.options.remove(o);
+				}
+			}
+		}
+		String[] options = params.getAll("option");
+		String[] answer = params.getAll("isAnswer");
+		sb.title =title;
+		int cnt =1;
+		for(String option : options){
+			Option o = new Option();
+			o.content=option;
+			o.save();
+			sb.options.add(o);
+			if (answer != null) {
+				for(String t :answer ){
+					if(cnt == Integer.valueOf(t)){
+						sb.answer.add(o);
+					}
+				}
+			}
+			cnt++;
+		}
+		if (StringUtils.isNotBlank(tags)) {
+			String[] tagArr = tags.split(",");
+			for(String tag:tagArr){
+				Tag t = TagService.getTag(tag);
+				sb.tags.add(t);
+			}
+		}
+		Tag t = TagService.getTag(course);
+		sb.course =t;
+		t = TagService.getTag(grade);
+		sb.grade =t;
+		sb.owner = UserService.getUser("admin");
+		sb.status = SubjectStatus.VALID;
+		sb.type = SubjectType.valueOf(subjectType);
+		sb.solution = solution;
+		sb.save();
+		index();
+    }
 	
 	public static void delete(final String ids){
 		Map result = new HashMap();
