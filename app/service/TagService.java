@@ -18,14 +18,14 @@ public class TagService {
 			return null;
 		}
 		String[] tag = name.split(":");
-		MorphiaQuery query = Tag.filter("name", tag[tag.length-1]);
+		MorphiaQuery query = Tag.filter("name",tag[tag.length-1].trim());
 		
 		Tag t = null;
 		if(query.count()==0){
 			t = addTag(name);
 		}else{
 			if(query.count()>1){
-				Tag parent = Tag.filter("name", tag[tag.length-2]).first();
+				Tag parent = Tag.filter("name", tag[tag.length-2].trim()).first();
 				t = query.filter("context", parent).first();
 			}else{
 				t = query.first();
@@ -39,15 +39,15 @@ public class TagService {
 		String[] tag = tagName.split(":");
 		Tag t = null;
 		for(int i=0;i<tag.length ;i++){
-			if(Tag.filter("name", tag[i]).first()== null){
+			if(Tag.filter("name", tag[i].trim()).first()== null){
 				if(i==0){
-					 t  = new Tag(tag[i],null);
+					 t  = new Tag(tag[i].trim(),null);
 					 t.index=0;
 					 t.save();
 				}else{
 					Tag context = Tag.filter("name", tag[i-1]).first();
 					Long index = Tag.filter("context", context).countAll();
-					t = new Tag(tag[i],context);
+					t = new Tag(tag[i].trim(),context);
 					t.index = Integer.parseInt(index.toString())+1;
 					t.save();
 				}
@@ -61,14 +61,14 @@ public class TagService {
 		String[] tag = tagName.split(":");
 		Tag t = null;
 		for(int i=0;i<tag.length ;i++){
-			if(Tag.filter("name", tag[i]).first()== null){
+			if(Tag.filter("name", tag[i].trim()).first()== null){
 				if(i==0){
-					 t  = new Tag(tag[i],null);
+					 t  = new Tag(tag[i].trim(),null);
 					 t.index=index;
 					 t.save();
 				}else{
-					Tag context = Tag.filter("name", tag[i-1]).first();
-					t = new Tag(tag[i],context);
+					Tag context = Tag.filter("name", tag[i-1].trim()).first();
+					t = new Tag(tag[i].trim(),context);
 					t.index = index;
 					t.save();
 				}
@@ -83,7 +83,7 @@ public class TagService {
 			return false;
 		}
 		String[] tags = tag.split(":");
-		MorphiaQuery query = Tag.filter("name", tags[tags.length-1]);
+		MorphiaQuery query = Tag.filter("name", tags[tags.length-1].trim());
 		if(query.count() >0){
 			return true;
 		}

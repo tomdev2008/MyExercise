@@ -123,6 +123,11 @@ public class Application extends Controller {
 		
 	}
 	
+	public static void fixTag(){
+		Tag t = TagService.getTag("真题\"");
+		t.name="真题";
+		t.save();
+	}
 	public static void initUserExercise(){
 		
 		User user = User.find("userName", "test1").first();

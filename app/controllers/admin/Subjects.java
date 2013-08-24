@@ -1,5 +1,6 @@
 package controllers.admin;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,6 +135,7 @@ public class Subjects extends  Controller{
 		sb.status = SubjectStatus.VALID;
 		sb.type = SubjectType.valueOf(subjectType);
 		sb.solution = solution;
+		sb.updateAt = new Date();
 		sb.save();
 		index();
     }
@@ -150,8 +152,9 @@ public class Subjects extends  Controller{
 			if (sl == null) {
 				continue;
 			}
+			Subject.findById(id).delete();
 		}
 		result.put("success", "删除成功");
-		render();
+		renderJSON(result);
 	}
 }

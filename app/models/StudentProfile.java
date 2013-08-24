@@ -27,8 +27,10 @@ public class StudentProfile extends Model{
 	@Reference 
 	public Tag currentGrade;
 	
+	@Reference 
+	public Set<Tag> courses = new HashSet<Tag>();
 	
-	public Map<String,Long> courses = new HashMap<String,Long>();
+	public Map<String,Long> courseScore = new HashMap<String,Long>();
 	
 	@Reference
 	public List<ScheduleInfo> schedule = new ArrayList<ScheduleInfo>();

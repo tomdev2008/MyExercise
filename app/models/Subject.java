@@ -44,7 +44,7 @@ public class Subject extends Model{
 
     public String solution;
     
-    public int weight=0;
+    public int weight=50;
 
     public int frequency = 14;
 

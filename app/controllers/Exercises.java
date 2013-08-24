@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import job.UserProfileUdateJob;
+
+import org.apache.commons.lang.time.DateUtils;
+
 import com.google.code.morphia.Key;
 
 import models.Option;
@@ -16,6 +20,7 @@ import models.Tag;
 import models.User;
 import models.UserExercise;
 import models.enums.UserExerciseStatus;
+import play.modules.morphia.Model.MorphiaQuery;
 import play.mvc.Controller;
 import play.mvc.Util;
 import service.TagService;
@@ -70,14 +75,17 @@ public class Exercises extends Controller {
 				sinfo.save();
 				profile.schedule.add(sinfo);
 			}
-			profile.courses.put(course.getId().toString(),0L);
+			profile.courses.add(course);
 			//profile.grades
 			//profile.currentGrade;
 			profile.user = user;
 			profile.save();
 
 		}
-		
+		Date now = new Date(System.currentTimeMillis());
+		now = DateUtils.setHours(now, 0);
+		now = DateUtils.setMinutes(now, 0);
+		now = DateUtils.setMilliseconds(now, 0);
 		List<UserExercise> exercises = UserExercise.find("user", user).filter("course", course).asList();
 		if(exercises.size() == 0){
 			List<ScheduleInfo> list = ScheduleInfo.find("user", user).asList();
@@ -95,11 +103,28 @@ public class Exercises extends Controller {
 				ue.tags = sb.tags;
 				ue.status = UserExerciseStatus.START;
 				ue.user = user;
+				ue.nextDate = now;
+				ue.URT = sb.frequency;
 				ue.subjectCreateAt = sb.createAt;
 				ue.save();
 				exercises.add(ue);
 			}
+			if(exercises.size() >5){
+				exercises  = exercises.subList(0, 5);
+			}
+		}else{
+			MorphiaQuery query = UserExercise.find("user", user)
+					.filter("course", course)
+					.filter("nextDate <=", new Date())
+					.filter("URT >", 0)
+					.order("-weight");
+			if(query.countAll() >5){
+				exercises = query.limit(5).asList();
+			}else{
+				exercises = query.asList();
+			}
 		}
+		
 		render(exercises);
 	}
 	
@@ -147,25 +172,43 @@ public class Exercises extends Controller {
 			 */
 			
 			if(userExercise.subject.answer.size() == cnt){
-				UserExercise.o().inc("correctCount, displayCount", 1, 1).update("_id", userExercise.getId());
+				if(userExercise.displayCount ==0){
+					userExercise.isFC =1;
+				}else if(userExercise.displayCount ==0 && userExercise.isFC ==0){
+					userExercise.isSC =1;
+				}
+				
+				//UserExercise.o().inc("correctCount, displayCount", 1, 1).update("_id", userExercise.getId());
+				userExercise.correctCount = userExercise.correctCount+1;
+				userExercise.displayCount = userExercise.displayCount+1;
+				userExercise.completeCount = userExercise.completeCount +1;
+				userExercise.URT = userExercise.URT -1;
 				correctCnt++;
 				userExercise.currentScore = 1;
+				
 			}else{
 				if(userExercise.userAnswer.size() ==0){
 					userExercise.currentScore = -1;
 				}else{
-					UserExercise.o().inc("mistakeCount, displayCount", 1, 1).update("_id", userExercise.getId());
+					//UserExercise.o().inc("mistakeCount, displayCount", 1, 1).update("_id", userExercise.getId());
+					userExercise.mistakeCount = userExercise.correctCount+1;
+					userExercise.displayCount = userExercise.displayCount+1;
+					userExercise.completeCount = userExercise.completeCount +1;
+					userExercise.URT = userExercise.URT -1;
 					mistakeCnt++;
 					userExercise.currentScore = 0;
 				}
 			}
 			//TODO:下次可以展现的时间
-			userExercise.nextDate = new Date();
+			Date next = new Date(System.currentTimeMillis());
+			next = DateUtils.addMinutes(next, 15);
+			userExercise.nextDate = next;
 			userExercise.updateAt = new Date();
 			userExercise.save();
 			exercises.add(userExercise);
+			
 		}	
-		
+		new UserProfileUdateJob(exercises).now();
 		render(exercises,correctCnt,mistakeCnt);
 	}
 	

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import models.Subject;
 import models.Tag;
 
 import org.apache.commons.lang.StringUtils;
@@ -68,9 +69,25 @@ public class Tags extends Controller {
 			if (sl == null) {
 				continue;
 			}
+			if(Subject.filter("tags", sl).countAll() >0){
+				Subject sb = Subject.filter("tags", sl).first();
+				result.put("error", "有题目引用该tag，请先修改题目的tag:"+sb.getId()+","+sb.title);
+				renderJSON(result);
+			}
+			if(Subject.filter("course", sl).countAll() >0){
+				Subject sb = Subject.filter("course", sl).first();
+				result.put("error", "有题目引用该course，请先修改题目的course:"+sb.getId()+","+sb.title);
+				renderJSON(result);
+			}
+			if(Subject.filter("grade", sl).countAll() >0){
+				Subject sb = Subject.filter("grade", sl).first();
+				result.put("error", "有题目引用该grade，请先修改题目的grade:"+sb.getId()+","+sb.title);
+				renderJSON(result);
+			}
+			Tag.findById(id).delete();
 		}
 		result.put("success", "删除成功");
-		render();
+		renderJSON(result);
 	}
 
 }
