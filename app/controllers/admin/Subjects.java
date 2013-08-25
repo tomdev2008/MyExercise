@@ -102,17 +102,30 @@ public class Subjects extends  Controller{
 				}
 			}
 		}
+		sb.answer.clear();
 		String[] options = params.getAll("option");
 		String[] answer = params.getAll("isAnswer");
 		sb.title =title;
 		int cnt =1;
-		for(String option : options){
-			Option o = new Option();
-			o.content=option;
-			o.save();
-			sb.options.add(o);
+		if(options !=null && options.length >0){
+			for(String option : options){
+				if(StringUtils.isBlank(option)){
+					continue;
+				}
+				Option o = new Option();
+				o.content=option;
+				o.save();
+				sb.options.add(o);
+				
+			}
+		}
+		
+		for(Option o :sb.options){
 			if (answer != null) {
 				for(String t :answer ){
+					if(StringUtils.isBlank(t)){
+						continue;
+					}
 					if(cnt == Integer.valueOf(t)){
 						sb.answer.add(o);
 					}

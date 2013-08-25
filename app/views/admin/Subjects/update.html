@@ -186,19 +186,23 @@ Preview.callback.autoReset = true;  // make sure it can run more than once
 					<div class="right">
 						${option.content}
 					</div>
+					
 					#{list items:item.answer, as :'answ'}
 						#{if option._id == answ._id}
-						<span style="float: right;margin-right: 80px;margin-top: -34px;">这个是正确答案</span>
+							<input type="checkbox" name="isAnswer" value ="${option_index}" checked="checked" />这是正确答案<br>
+					
 						#{/if}
+						#{else}
+							<input type="checkbox" name="isAnswer" value ="${option_index}" />这是正确答案<br>
+						#{/else}
 					#{/list}
+					#{if item.answer.size ==0}
+						<input type="checkbox" name="isAnswer" value ="${option_index}" />这是正确答案<br>
+					#{/if}
 					<input type="button" value="删除" data-id="${option._id}" class="removeOption">
 				</div>
 				
 		    #{/list}
-			<div class="left">新增选项:</div>
-			<div class="right">
-				<input type="text" name="option" /><input type="checkbox" name="isAnswer" value ="0" />这是正确答案<br>
-			</div>
 		</div>
 	</div>
 	<div class="line">
@@ -224,6 +228,7 @@ var removeTagIds = [];
 var removeOptionIds = [];
 function addOption() {
 	$("#options").append('<div class="line"><div class="left">新增选项：</div><div class="right"><input type="text" name="option" /><input type="checkbox" name="isAnswer" value ="" />这是正确答案<br></div><div class="say" style="border:1px solid black;width:15px;padding-left:8px;cursor: pointer;"  onclick="removeOption(this)">X</div></div>');
+	reNum();
 }
 function removeOption(el) {
 	if ($("#options").find(".line").length < 2) {
@@ -231,7 +236,17 @@ function removeOption(el) {
 		return;
 	}
 	$(el).closest(".line").remove();
+	reNum();
 }
+function reNum() {
+	var i = 1;
+	$("input[type=checkbox]").each(function() {
+		$(this).attr("value", i);
+		i++;
+	})
+	//$("#maxFile").val(i-1);
+}
+
 $(function() {
 	$("#submitButton").click(function() {
 		$("#removeOptionIds").val(removeOptionIds.join(","))
