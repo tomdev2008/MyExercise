@@ -9,9 +9,6 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 
 import controllers.admin.Secure;
-
-import models.AdminRole;
-import models.Menu;
 import models.Tag;
 import models.User;
 import play.modules.morphia.Model.MorphiaQuery;
@@ -139,7 +136,7 @@ public class TagService {
 	 */
 	public static void delTree(final String tagId) {
 		Tag tag = Tag.findById(tagId);
-		List<Tag> children = Menu.filter("context", tag).asList();
+		List<Tag> children = Tag.filter("context", tag).asList();
 		for (Tag child:children) {
 			delTree(child.getId().toString());
 		}
