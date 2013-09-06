@@ -8,10 +8,8 @@ import org.apache.commons.lang.StringUtils;
 
 import play.mvc.Controller;
 
-import models.Menu;
 import models.Tag;
 import service.TagService;
-import service.TreeService;
 import utils.EasyMap;
 
 public class KnowlegeTags extends Controller {
@@ -23,91 +21,91 @@ public class KnowlegeTags extends Controller {
 	}
 	
 	public static void tree(){
-		List<Tag> roots = Tag.filter("parent exists", false).filter("name", "Math").order("index").asList();
+		List<Tag> roots = Tag.filter("context exists", false).filter("name", "Math").order("index").asList();
 		List<Map> result = new ArrayList();
 		TagService.createTree(roots, result);
-		roots = Tag.filter("parent exists", false).filter("name", "English").order("index").asList();
+		roots = Tag.filter("context exists", false).filter("name", "English").order("index").asList();
 		TagService.createTree(roots, result);
 		renderJSON(result);
 	}
 	
 	/**
 	 * 新增一个菜单.
-	 * @param menuName 菜单名称
+	 * @param TagName 菜单名称
 	 * @param url 菜单指向URL
-	 * @param parentMenuId 父菜单ID
+	 * @param parenttagId 父菜单ID
 	 */
-	public static void add(final String menuName,
-			final String url, final String parentMenuId) {
-//		List<Menu> menus = Menu.filter("menuName", menuName).asList();
-//		if (menus.size() > 0) {
+	public static void add(final String name, final String contextTagId,final int index) {
+//		List<Tag> Tags = Tag.filter("TagName", TagName).asList();
+//		if (Tags.size() > 0) {
 //			renderJSON(new EasyMap("error", "该菜单名已存在，请重新填写！"));
 //		}
-		if (StringUtils.isBlank(menuName)) {
+		if (StringUtils.isBlank(name)) {
 			renderJSON(new EasyMap("error", "请输入菜单名！"));
 		}
- 		Menu menu = new Menu();
-		menu.menuName = menuName;
-		if (!StringUtils.isBlank(url)) {
-			menu.url = url;
-		}
-		menu.order = 0l;
-		if (StringUtils.isNotBlank(parentMenuId)) {
-			Menu parent = Menu.findById(parentMenuId);
+ 		
+ 		Tag context = null;
+		
+	
+		
+		if (StringUtils.isNotBlank(contextTagId)) {
+			Tag parent = Tag.findById(contextTagId);
 			if (parent != null) {
-				menu.parent = parent;
+				context = parent;
 			}
 		}
-		menu.save();
+		Tag tag = new Tag(name,context);
+		tag.index = index;
+		tag.save();
 		renderJSON(new EasyMap("success", "新增成功"));
 	}
 	/**
 	 * 删除一个菜单及其子菜单.
-	 * @param menuId 菜单ID
+	 * @param TagId 菜单ID
 	 */
-	public static void del(final String menuId) {
-		if (StringUtils.isBlank(menuId)) {
+	public static void del(final String tagId) {
+		if (StringUtils.isBlank(tagId)) {
 			renderJSON(new EasyMap("error", "请选择要删除的菜单"));
 		}
-		if (Menu.findById(menuId) == null) {
+		if (Tag.findById(tagId) == null) {
 			renderJSON(new EasyMap("error", "请选择要删除的菜单"));
 		}
-		TreeService.delTree(menuId);
+
+		TagService.delTree(tagId);
 		renderJSON(new EasyMap("success", "删除成功"));
 	}
 	/**
 	 * 根据一个菜单ID 返回菜单详情.
-	 * @param menuId
+	 * @param tagId
 	 */
-	public static void detail(final String menuId) {
-		if (StringUtils.isBlank(menuId)) {
+	public static void detail(final String tagId) {
+		if (StringUtils.isBlank(tagId)) {
 			renderJSON(new EasyMap("error", "请选择要修改的菜单"));
 		}
-		Menu menu = Menu.findById(menuId);
-		if (menu == null) {
+		Tag tag = Tag.findById(tagId);
+		if (tag == null) {
 			renderJSON(new EasyMap("error", "请选择要修改的菜单"));
 		}
-		renderJSON(menu, new play.modules.morphia.utils.ObjectIdGsonAdapter());
+		renderJSON(tag, new play.modules.morphia.utils.ObjectIdGsonAdapter());
 	}
 	/**
 	 * 修改一个菜单.
-	 * @param menuId menuId
+	 * @param tagId tagId
 	 */
-	public static void update(final String menuId, final String menuName, final String url, final long order) {
-		if (StringUtils.isBlank(menuId)) {
+	public static void update(final String tagId, final String name, final int index) {
+		if (StringUtils.isBlank(tagId)) {
 			renderJSON(new EasyMap("error", "请选择要更新的菜单"));
 		}
-		if (StringUtils.isBlank(menuName)) {
+		if (StringUtils.isBlank(name)) {
 			renderJSON(new EasyMap("error", "请输入菜单名！"));
 		}
-		Menu menu = Menu.findById(menuId);
-		if (menu == null) {
+		Tag tag = Tag.findById(tagId);
+		if (tag == null) {
 			renderJSON(new EasyMap("error", "请选择要更新的菜单"));
 		}
-		menu.menuName = menuName;
-		menu.url = url;
-		menu.order = order;
-		menu.save();
+		tag.name = name;
+		tag.index = index;
+		tag.save();
 		renderJSON(new EasyMap("success", "更新成功"));
 	}
 }

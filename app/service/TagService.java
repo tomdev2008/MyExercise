@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 
 import controllers.admin.Secure;
 
+import models.AdminRole;
 import models.Menu;
 import models.Tag;
 import models.User;
@@ -124,11 +125,25 @@ public class TagService {
 			Map node = new HashMap();
 			node.put("id", root.getId().toString());
 			node.put("text", root.name);
-			List<Tag> children = Tag.filter("parent", root).order("index").asList();
+			List<Tag> children = Tag.filter("context", root).order("index").asList();
 			List<Map> treeChildren = new ArrayList();
 			createTree(children, treeChildren);
 			node.put("children", treeChildren);
 			result.add(node);
 		}
+	}
+	
+	/**
+	 * 递归删除树.
+	 * @param menueId 树的父亲节点ID
+	 */
+	public static void delTree(final String tagId) {
+		Tag tag = Tag.findById(tagId);
+		List<Tag> children = Menu.filter("context", tag).asList();
+		for (Tag child:children) {
+			delTree(child.getId().toString());
+		}
+		tag.delete();
+		
 	}
 }
