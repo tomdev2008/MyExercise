@@ -9,6 +9,7 @@
 <!--[if lte IE 7]><link id="ie7Hack" rel="stylesheet" href="http://ytk.fbcontent.cn/s/e1615147-lte-ie7.css"/><![endif]-->
 <!--[if gte IE 9]><link id="ie9Hack" rel="stylesheet" href="http://ytk.fbcontent.cn/s/26d1828d-gte-ie9.css"/><![endif]-->
     </head>
+%{def user = controllers.Secure.getLoginUser();}%
     <body data-environment="production" data-page-name="SignupResult">
         <div class="wrap">
             <div class="header">
@@ -16,13 +17,13 @@
                     <div class="header-nav">
                         <a href="javascript:void(0)">手机客户端</a>
                         <span class="split">|</span>
-                         <a href="" rel="nofollow">用户xxxxxx</a>
+                         <a href="" rel="nofollow">${user.userName}</a>
                     </div>
                 </div>
             </div>
 <div class="signup-success-wrap">
     <div class="message">
-        <span class="bonjour bonjour-ok">&nbsp;</span>用户xxxxxx，你已成为智题的用户
+        <span class="bonjour bonjour-ok">&nbsp;</span>${user.userName}，你已成为智题的用户
     </div>
     <h1>选择一个科目开始练习</h1>
 

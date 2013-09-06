@@ -2,16 +2,9 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import job.UserProfileUdateJob;
-
-import org.apache.commons.lang.time.DateUtils;
-
-import com.google.code.morphia.Key;
-
 import models.Option;
 import models.ScheduleInfo;
 import models.StudentProfile;
@@ -20,11 +13,17 @@ import models.Tag;
 import models.User;
 import models.UserExercise;
 import models.enums.UserExerciseStatus;
+
+import org.apache.commons.lang.time.DateUtils;
+
 import play.modules.morphia.Model.MorphiaQuery;
 import play.mvc.Controller;
 import play.mvc.Util;
+import play.mvc.With;
 import service.TagService;
 
+import com.google.code.morphia.Key;
+@With(Secure.class)
 public class Exercises extends Controller {
 
 	public static void index(){

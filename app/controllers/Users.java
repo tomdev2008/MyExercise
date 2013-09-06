@@ -4,8 +4,9 @@ import models.User;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Util;
+import play.mvc.With;
 import utils.Constant;
-
+@With(Secure.class)
 public class Users extends Controller {
 
 	

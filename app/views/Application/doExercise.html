@@ -11,6 +11,7 @@
 <!--[if lte IE 7]><link id="ie7Hack" rel="stylesheet" href="http://ytk.fbcontent.cn/s/e1615147-lte-ie7.css"/><![endif]-->
 <!--[if gte IE 9]><link id="ie9Hack" rel="stylesheet" href="http://ytk.fbcontent.cn/s/26d1828d-gte-ie9.css"/><![endif]-->
 </head>
+%{def user = controllers.Secure.getLoginUser();}%
 <body data-environment="production" data-page-name="Home">
 	<div class="wrap">
 		<div class="repeat-x default-t">
@@ -26,7 +27,7 @@
 						class="sprite sprite-mobile-gray i-20"></span> 手机客户端
 					</a> <a href="javascript:void(0)" class="user-nav user-menu-trigger">
 						<span class="sprite sprite-profile i-20"></span> <span
-						class="sprite sprite-profile-tip"> <span class="email">用户xxxxxx</span>
+						class="sprite sprite-profile-tip"> <span class="email">${user.userName}</span>
 							<span class="sprite sprite-profile-tip-arrow"></span>
 					</span>
 					</a>

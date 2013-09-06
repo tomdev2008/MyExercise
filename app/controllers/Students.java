@@ -3,7 +3,8 @@ package controllers;
 import models.StudentProfile;
 import models.User;
 import play.mvc.Controller;
-
+import play.mvc.With;
+@With(Secure.class)
 public class Students extends Controller {
 	public static void index(final String userid) {
 		//TODO：获取当前用户
