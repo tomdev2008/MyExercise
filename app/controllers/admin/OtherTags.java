@@ -12,7 +12,7 @@ import models.Tag;
 import service.TagService;
 import utils.EasyMap;
 
-public class KnowlegeTags extends Controller {
+public class OtherTags extends Controller {
 	/**
 	 * 知识点管理.
 	 */
@@ -21,10 +21,9 @@ public class KnowlegeTags extends Controller {
 	}
 	
 	public static void tree(){
-		List<Tag> roots = Tag.filter("context exists", false).filter("name", "Math").order("index").asList();
+		String[] tags = {"Math","English"};
+		List<Tag> roots = Tag.filter("context exists", false).filter("name nin", tags).order("index").asList();
 		List<Map> result = new ArrayList();
-		TagService.createTree(roots, result);
-		roots = Tag.filter("context exists", false).filter("name", "English").order("index").asList();
 		TagService.createTree(roots, result);
 		renderJSON(result);
 	}
