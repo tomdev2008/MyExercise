@@ -181,7 +181,9 @@ public class Subjects extends  Controller{
 		renderJSON(result);
 	}
 	
-	
+	public static void batchAdd(){
+		render();
+	}
 	public static void excel(File resource) throws BiffException, IOException{
 		
 	    Workbook rwb = null;
@@ -193,20 +195,22 @@ public class Subjects extends  Controller{
 	    //获取Excel文件对象
 	    rwb = Workbook.getWorkbook(stream);
 	    
-	    //获取文件的指定工作表 默认的第一个
-	    Sheet sheet = rwb.getSheet(0);  
+	    //获取文件的指定工作表 默认的第3个
+	    Sheet sheet = rwb.getSheet(2);  
 	   
 	    //行数(表头的目录不需要，从1开始)
 	    for(int i=1; i<sheet.getRows(); i++){
-	     
-	     //创建一个数组 用来存储每一列的值
-	     String[] str = new String[sheet.getColumns()];
-	     
+	    
+	     //创建一个数组 用来存储每一列的值 
 	     //列数
-	     if(sheet.getColumns() ==11){
+	     if(sheet.getColumns() >0){
 		      //题目
+	    	
+	    	 cell = sheet.getCell(0,i);   
+	    	 if(StringUtils.isBlank(cell.getContents())){
+	    		 break;
+	    	 }
 	    	 Subject sb = new Subject();
-	    	 cell = sheet.getCell(0,i);    
 		     sb.title = cell.getContents();
 		      //选项A
 		     Option a = new Option();
@@ -275,5 +279,6 @@ public class Subjects extends  Controller{
 	   
 	     
 	    }
+	    batchAdd();
 	}
 }
