@@ -1,6 +1,6 @@
 # Application dependencies
 
 require:
-   - play -> play 1.2.4
+   - play -> play 1.2.7
    - play -> morphia 1.2.12
-   
+   - play -> excel 1.2.3

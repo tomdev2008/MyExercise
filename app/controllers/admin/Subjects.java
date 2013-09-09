@@ -1,9 +1,19 @@
 package controllers.admin;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -169,5 +179,101 @@ public class Subjects extends  Controller{
 		}
 		result.put("success", "删除成功");
 		renderJSON(result);
+	}
+	
+	
+	public static void excel(File resource) throws BiffException, IOException{
+		
+	    Workbook rwb = null;
+	    Cell cell = null;
+	    
+	    //创建输入流
+	    InputStream stream = new FileInputStream(resource);
+	    
+	    //获取Excel文件对象
+	    rwb = Workbook.getWorkbook(stream);
+	    
+	    //获取文件的指定工作表 默认的第一个
+	    Sheet sheet = rwb.getSheet(0);  
+	   
+	    //行数(表头的目录不需要，从1开始)
+	    for(int i=1; i<sheet.getRows(); i++){
+	     
+	     //创建一个数组 用来存储每一列的值
+	     String[] str = new String[sheet.getColumns()];
+	     
+	     //列数
+	     if(sheet.getColumns() ==11){
+		      //题目
+	    	 Subject sb = new Subject();
+	    	 cell = sheet.getCell(0,i);    
+		     sb.title = cell.getContents();
+		      //选项A
+		     Option a = new Option();
+		     cell = sheet.getCell(1,i);    
+		     a.content = cell.getContents();
+		     a.save();
+		     sb.options.add(a);
+		      //选项B	
+		     Option b = new Option();
+		     cell = sheet.getCell(2,i);    
+		     b.content = cell.getContents();
+		     b.save();
+		     sb.options.add(b);
+		      //选项C	
+		     Option c = new Option();
+		     cell = sheet.getCell(3,i);    
+		     c.content = cell.getContents();
+		     c.save();
+		     sb.options.add(c);
+		      //选项D	
+		     Option d = new Option();
+		     cell = sheet.getCell(4,i);    
+		     d.content = cell.getContents();
+		     d.save();
+		     sb.options.add(d);
+		      //正确选项
+		     cell = sheet.getCell(5,i);  
+		     String anw = cell.getContents(); 
+		     if("a".equalsIgnoreCase(anw)){
+		    	 sb.answer.add(a);
+		     }else  if("b".equalsIgnoreCase(anw)){
+		    	 sb.answer.add(b);
+		     }else  if("c".equalsIgnoreCase(anw)){
+		    	 sb.answer.add(d);
+		     }else  if("d".equalsIgnoreCase(anw)){
+		    	 sb.answer.add(d);
+		     }
+		     
+		      //解析
+		     cell = sheet.getCell(6,i);  
+		     String solu = cell.getContents(); 
+		     sb.solution = solu;
+		      //Course
+		     cell = sheet.getCell(7,i);  
+		     String cour = cell.getContents();
+		     Tag course =TagService.getTag(cour);
+		     sb.course = course;
+		      //Grade
+		     cell = sheet.getCell(8,i);  
+		     String gde = cell.getContents();
+		     Tag grade =TagService.getTag(gde);
+		     sb.grade = grade;
+		      //Orign
+		     cell = sheet.getCell(9,i);  
+		     String ori = cell.getContents();
+		     Tag orign =TagService.getTag(ori);
+		     sb.tags.add(orign);
+		     //Tags
+		     cell = sheet.getCell(10,i);  
+		     String t = cell.getContents();
+		     Tag tag =TagService.getTag(t);
+		     sb.tags.add(tag);
+		     sb.save();
+		     
+	     }
+	   
+	     
+	    }
 	}
 }
